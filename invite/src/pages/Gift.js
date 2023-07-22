@@ -39,6 +39,7 @@ const Main = styled.main`
       justify-content: center;
       align-items: center;
       gap: 8px;
+      width: 160px;
       border: 1px solid #7B5E5A;
       border-radius: 8px;
       height: 30px;

@@ -17,7 +17,7 @@ const Content = styled.header`
   }
   >span{
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 100;
     width: 25%;
     cursor: pointer;
@@ -26,7 +26,7 @@ const Content = styled.header`
   
   h1{
     /* width: 40%; */
-    font-size: 16px;
+    font-size: 14px;
   }
   
   img{
