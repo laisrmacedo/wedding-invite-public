@@ -6,7 +6,7 @@ import check from "../assets/check.png";
 import gift from "../assets/gift.png";
 import { Button } from '../components/Button';
 import { useNavigate, useParams } from 'react-router-dom'
-import { goToLocation } from '../router/coordinator';
+import { goToGift, goToLocation } from '../router/coordinator';
 
 const Main = styled.main`
     flex-direction: column;
@@ -37,7 +37,7 @@ export const Home = () => {
         </h2>
         <div className="icons">
           <Button onClick={() => goToLocation(navigate)} img={location} text={"Localização"}/>
-          <Button img={gift} text={"Presente"}/>
+          <Button onClick={() => goToGift(navigate)} img={gift} text={"Presente"}/>
           <Button img={check} text={"Confirmação de presença"}/>
         </div>
       </Main>
