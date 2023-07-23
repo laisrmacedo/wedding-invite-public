@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Container } from '../GlobalStyle'
+import { Container } from '../components/Container'
 import { Animation } from "../components/Animation";
 import location from "../assets/pin.png";
 import check from "../assets/check.png";
@@ -12,6 +12,8 @@ const Main = styled.main`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
+    z-index: 1;
     h1{
       width: 80%;
       font-size: min(10vw, 40px);

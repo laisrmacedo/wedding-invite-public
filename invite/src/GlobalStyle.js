@@ -5,7 +5,8 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #7B5E5A;
+    /* color: #7B5E5A; */
+    color: #7C5B59;
     text-align: center;
     overflow: hidden;
 
@@ -29,10 +30,14 @@ export const GlobalStyle = createGlobalStyle`
 
   main{
     display: flex;
-    border: 1px solid #7B5E5A;
+    /* border: 1px solid #7B5E5A; */
     width: 100%;
     max-width: 420px;
     height: 83vh;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
+    /* background-color: rgb(231, 213, 194, .4); */
+    background-color: rgb(217, 220, 217, .4);
   }
 
 h1{
@@ -100,15 +105,4 @@ p{
   width: 80%;
   justify-content: space-between;
 }
-`
-
-export const Container = styled.div`
-  background-color: #fffaeb8a;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  padding: 10px;
-  /* border: 1px solid red; */
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Container } from '../GlobalStyle'
+import { Container } from '../components/Container'
 import { Header } from '../components/Header'
 import whatsapp from '../assets/whatsapp.png'
 
@@ -8,6 +8,8 @@ const Main = styled.main`
     gap: 40px;
     align-items: center;
     padding-bottom: 40px; 
+    position: relative;
+    z-index: 1;
     p{
       font-size: 16px;
     }

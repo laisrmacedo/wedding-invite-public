@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Container } from '../GlobalStyle'
+import { Container } from '../components/Container'
 import { Header } from '../components/Header'
 import whatsapp from '../assets/whatsapp.png'
 
@@ -7,6 +7,8 @@ const Main = styled.main`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
     >span{
       display: flex;
       flex-direction: column;
