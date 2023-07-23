@@ -23,7 +23,7 @@ export const Home = () => {
       <Main>
         <Animation width={300} height={300}/>
         <div className="title">
-          <h1><span>Leonardo</span> & <span>Laiane</span></h1>
+          <h1>Leonardo &nbsp; & &nbsp; Laiane</h1>
           <p>com amor, convidam para seu casamento</p>
         </div>
         <h2>

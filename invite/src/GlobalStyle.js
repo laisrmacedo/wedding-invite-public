@@ -5,7 +5,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Dosis', sans-serif;
     color: #7B5E5A;
     text-align: center;
     overflow: hidden;
@@ -33,17 +32,16 @@ export const GlobalStyle = createGlobalStyle`
     border: 1px solid #7B5E5A;
     width: 100%;
     max-width: 420px;
-    height: 85vh;
+    height: 82vh;
   }
 
 h1{
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 8px;
+  /* text-transform: uppercase; */
   width: 80%;
   font-weight: 200;
-  font-size: min(10vw, 36px);
+  font-size: min(8vw, 36px);
+  font-family: 'Rouge Script', cursive;
+  /* font-family: 'Great Vibes', cursive; */
 }
 
 h2{
@@ -52,12 +50,39 @@ h2{
   justify-content: space-between;
   gap: 8px;
   width: 70%;
+  font-family: 'Dosis', sans-serif;
+}
+h3{
+  font-family: 'Dosis', sans-serif;
 }
 
 p{
   width: 80%;
   font-weight: 200;
   font-size: min(10vw, 18px);
+  font-family: 'Dosis', sans-serif;
+}
+
+.wppBtn{
+  font-family: 'Dosis', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 160px;
+  border: 1px solid #7B5E5A;
+  border-radius: 8px;
+  height: 30px;
+  padding: 8px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+
+  img{
+    height: 100%;
+    filter: brightness(0.5);
+  }
 }
 
 .title{
