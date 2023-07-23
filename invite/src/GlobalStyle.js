@@ -35,7 +35,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     max-width: 420px;
     height: 90vh;
-    height: -webkit-fill-available;
     margin-bottom: 50px;
   }
 
