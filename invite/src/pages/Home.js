@@ -14,7 +14,7 @@ const Main = styled.main`
     align-items: center;
     h1{
       width: 80%;
-      font-size: min(8vw, 42px);
+      font-size: min(10vw, 40px);
     }
 `
 
