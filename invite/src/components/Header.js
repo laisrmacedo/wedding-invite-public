@@ -17,7 +17,8 @@ const Content = styled.header`
   }
   >span{
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 12px;
+    font-family: 'Dosis', sans-serif;
     font-weight: 100;
     width: 25%;
     cursor: pointer;
@@ -26,7 +27,7 @@ const Content = styled.header`
   
   h1{
     /* width: 40%; */
-    font-size: 14px;
+    font-size: 18px;
   }
   
   img{

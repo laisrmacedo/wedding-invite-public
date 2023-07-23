@@ -12,6 +12,10 @@ const Main = styled.main`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    h1{
+      width: 80%;
+      font-size: min(8vw, 42px);
+    }
 `
 
 

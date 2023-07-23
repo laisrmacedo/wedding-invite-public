@@ -37,9 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 
 h1{
   /* text-transform: uppercase; */
-  width: 80%;
   font-weight: 200;
-  font-size: min(8vw, 36px);
   font-family: 'Rouge Script', cursive;
   /* font-family: 'Great Vibes', cursive; */
 }
