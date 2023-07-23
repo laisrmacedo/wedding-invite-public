@@ -32,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
     border: 1px solid #7B5E5A;
     width: 100%;
     max-width: 420px;
-    height: 82vh;
+    height: 83vh;
   }
 
 h1{
