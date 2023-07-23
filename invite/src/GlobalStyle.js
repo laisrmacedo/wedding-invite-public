@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     /* color: #7B5E5A; */
-    color: #7C5B59;
+    color: #492203;
     text-align: center;
     overflow: hidden;
 
@@ -73,18 +73,22 @@ p{
   align-items: center;
   gap: 8px;
   width: 160px;
-  border: 1px solid #7B5E5A;
+  /* border: 1px solid #7B5E5A; */
+  background: #D4D1D0;
   border-radius: 8px;
   height: 30px;
   padding: 8px 20px;
+  margin: 10px;
   font-size: 12px;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 
   img{
     height: 100%;
-    filter: brightness(0.5);
+    filter: brightness(0.3);
   }
 }
 

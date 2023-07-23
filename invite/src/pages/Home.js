@@ -18,6 +18,11 @@ const Main = styled.main`
       width: 80%;
       font-size: min(10vw, 40px);
     }
+    h2{
+      display: flex;
+      justify-content: center;
+      font-size: min(5.8vw, 26px);
+    }
 `
 
 
@@ -33,13 +38,7 @@ export const Home = () => {
           <p>com amor, convidam para seu casamento</p>
         </div>
         <h2>
-          <span>10</span>
-          <span>|</span>
-          <span>JANEIRO</span>
-          <span>|</span>
-          <span>2023</span>
-          <span>|</span>
-          <span>15H</span>
+          10 &nbsp;|&nbsp; &nbsp;JANEIRO&nbsp; &nbsp;|&nbsp; &nbsp;2024&nbsp; &nbsp;|&nbsp; 16H
         </h2>
         <div className="icons">
           <Button onClick={() => goToLocation(navigate)} img={location} text={"Localização"}/>

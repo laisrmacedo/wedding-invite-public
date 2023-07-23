@@ -10,8 +10,7 @@ const Span = styled.span`
 
   img{
     height: 32px;
-    opacity: 0.2;
-    /* border: 1px solid red; */
+    opacity: .7;
   }
   p{
     font-weight: 200;
