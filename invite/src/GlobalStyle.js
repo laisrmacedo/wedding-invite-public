@@ -29,13 +29,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   main{
-    /* margin: 0 auto; */
     display: flex;
     border: 1px solid #7B5E5A;
     width: 100%;
     max-width: 420px;
-    height: 90vh;
-    margin-bottom: 50px;
+    height: 85vh;
   }
 
 h1{
