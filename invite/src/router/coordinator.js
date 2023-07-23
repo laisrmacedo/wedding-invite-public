@@ -7,5 +7,9 @@ export const goToLocation = (navigate) => {
 }
 
 export const goToGift = (navigate) => {
-  navigate(`/presente`)
+  navigate(`/presentes`)
+}
+
+export const goToCheck = (navigate) => {
+  navigate(`/confirmacao`)
 }

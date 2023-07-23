@@ -21,6 +21,7 @@ const Content = styled.div`
       object-fit: cover;
       width: 100%;
       height: 100%;
+      filter: saturate(0.5);
     }
   }
 `
