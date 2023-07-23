@@ -5,7 +5,8 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #7B5E5A;
+    /* color: #7B5E5A; */
+    color: #492203;
     text-align: center;
     overflow: hidden;
 
@@ -29,10 +30,14 @@ export const GlobalStyle = createGlobalStyle`
 
   main{
     display: flex;
-    border: 1px solid #7B5E5A;
+    /* border: 1px solid #7B5E5A; */
     width: 100%;
     max-width: 420px;
     height: 83vh;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(8px);
+    /* background-color: rgb(231, 213, 194, .4); */
+    background-color: rgb(217, 220, 217, .3);
   }
 
 h1{
@@ -68,18 +73,22 @@ p{
   align-items: center;
   gap: 8px;
   width: 160px;
-  border: 1px solid #7B5E5A;
+  /* border: 1px solid #7B5E5A; */
+  background: #D4D1D0;
   border-radius: 8px;
   height: 30px;
   padding: 8px 20px;
+  margin: 10px;
   font-size: 12px;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 
   img{
     height: 100%;
-    filter: brightness(0.5);
+    filter: brightness(0.3);
   }
 }
 
@@ -100,15 +109,4 @@ p{
   width: 80%;
   justify-content: space-between;
 }
-`
-
-export const Container = styled.div`
-  background-color: #fffaeb8a;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  padding: 10px;
-  /* border: 1px solid red; */
 `
