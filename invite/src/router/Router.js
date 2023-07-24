@@ -8,10 +8,11 @@ export const Router = () => {
   return(
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home/>}/>
-        <Route path={`/local`} element={<Location/>}/>
-        <Route path={`/presentes`} element={<Gift/>}/>
-        <Route path={`/confirmacao`} element={<Presence/>}/>
+        {/* <Route index element={<Home/>}/> */}
+        <Route path={`/:name/:n`} element={<Home/>}/>
+        <Route path={`/:name/:n/local`} element={<Location/>}/>
+        <Route path={`/:name/:n/presentes`} element={<Gift/>}/>
+        <Route path={`/:name/:n/confirmacao`} element={<Presence/>}/>
       </Routes>
     </BrowserRouter>
   )

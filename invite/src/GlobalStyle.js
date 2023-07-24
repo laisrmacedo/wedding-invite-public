@@ -66,18 +66,15 @@ p{
   font-family: 'Dosis', sans-serif;
 }
 
-.wppBtn{
+.btn{
   font-family: 'Dosis', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  width: 160px;
-  /* border: 1px solid #7B5E5A; */
   background: #D4D1D0;
   border-radius: 8px;
-  height: 30px;
-  padding: 8px 20px;
+  border: none;
   margin: 10px;
   font-size: 12px;
   text-transform: uppercase;
@@ -85,10 +82,27 @@ p{
   cursor: pointer;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.wppBtn{
+  width: 160px;
+  height: 30px;
+  padding: 8px 20px;
 
   img{
     height: 100%;
     filter: brightness(0.3);
+  }
+}
+
+.checkBtn{
+  width: 90px;
+  padding: 4px 20px;
+  
+  img{
+    width: 15px;
+    height: 15px;
+    filter: brightness(.9);
   }
 }
 
