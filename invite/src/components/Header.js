@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Animation } from './Animation'
 import { goToHome } from '../router/coordinator';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Content = styled.header`
   display: flex;
@@ -39,14 +39,14 @@ const Content = styled.header`
 
 export const Header = (props) => {
   const navigate = useNavigate()
-
+  const {name, n} = useParams()
   return(
     <Content>
       <div>
         <Animation width={40} height={40}/>
         <h1>Leonardo & Laiane</h1>
       </div>
-      <span onClick={() => goToHome(navigate)}>&#5130; Voltar</span>
+      <button className="btn checkBtn" onClick={() => goToHome(navigate, name, n)}>&#5130; &nbsp;Voltar</button>
     </Content>
   )
 }

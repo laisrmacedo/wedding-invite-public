@@ -28,6 +28,7 @@ const Main = styled.main`
 
 export const Home = () => {
   const navigate = useNavigate()
+  const {name, n} = useParams()
 
   return(
     <Container>
@@ -41,9 +42,9 @@ export const Home = () => {
           06 &nbsp;| &nbsp;JANEIRO&nbsp; | &nbsp;2024&nbsp; |&nbsp; 16H
         </h2>
         <div className="icons">
-          <Button onClick={() => goToLocation(navigate)} img={location} text={"Local"}/>
-          <Button onClick={() => goToGift(navigate)} img={gift} text={"Presentes"}/>
-          <Button onClick={() => goToCheck(navigate)} img={check} text={"Confirmação de presença"}/>
+          <Button onClick={() => goToLocation(navigate, name, n)} img={location} text={"Local"}/>
+          <Button onClick={() => goToGift(navigate, name, n)} img={gift} text={"Presentes"}/>
+          <Button onClick={() => goToCheck(navigate, name, n)} img={check} text={"Confirmação de presença"}/>
         </div>
       </Main>
     </Container>
