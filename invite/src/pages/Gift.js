@@ -57,7 +57,7 @@ export const Gift = () => {
             <p>Laiane Rodrigues Macedo </p>
           </span>
           <p style={{fontStyle: 'italic'}}>Com amor, Leonardo e Laiane.</p>
-          <a className="wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
+          <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
         </div>
       </Main>
     </Container>

@@ -96,8 +96,8 @@ p{
 }
 
 .checkBtn{
-  width: 90px;
-  padding: 4px 20px;
+  width: 80px;
+  padding: 4px 10px;
   
   img{
     width: 15px;
