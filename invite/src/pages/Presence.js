@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { Header } from "../components/Header"
 import { useParams } from "react-router-dom"
 import whatsapp from '../assets/whatsapp.png'
-import happy from '../assets/happy.png'
-import sad from '../assets/sad.png'
 import { useState } from "react"
 import { Form } from "../components/Form"
 
@@ -23,7 +21,7 @@ const Main = styled.main`
   }
 
   >div{
-    height: 40%;
+    height: 50%;
     width: 100%;
     span{
       width: 100%;
@@ -86,8 +84,8 @@ export const Presence = () => {
           <span id="check" className={displayCheck}>
             <p>Você poderá comparecer?</p>
             <span>
-              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'visible', 'hidden')}><img src={happy}/>SIM</button>
-              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'hidden', 'visible')}><img src={sad}/>NÃO</button>
+              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'visible', 'hidden')}>&#10003; &nbsp;SIM</button>
+              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'hidden', 'visible')}>&#10007; &nbsp;NÃO</button>
             </span>
           </span>
           <span id="response-yes" className={displayFormYes}>

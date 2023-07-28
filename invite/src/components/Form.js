@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import sad from '../assets/sad.png'
+import happy from '../assets/happy.png'
+
 
 const Container = styled.div`
   width: 100%;
@@ -8,9 +11,15 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* gap: 10px; */
-  /* border: 1px solid red; */
-  
+  p{
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  img{
+    width: 18px;
+    height: 18px;
+    filter: brightness(.9);
+  }
   form{
     display: flex;
     justify-content: center;
@@ -54,6 +63,7 @@ const Container = styled.div`
   button{
     padding: 4px;
     width: 100px;
+    height: 24px;
     box-shadow: none;
     margin: 14px 0 0 0;
   }
@@ -82,34 +92,37 @@ export const Form = ({response, toChangeDisplay}) => {
   return(
     <Container response={JSON.parse(response)}>
       {JSON.parse(response) ? 
-      <form onSubmit={handleClick}>
-        <span>
-          <label>SENHA 1</label>
-          <input 
-            placeholder="Seu nome"
-            required
-            type="text"
-            name="ticket1"
-            value={form.ticket1}
-            onChange={onChangeForm}
-          />
-        </span>
-        <span>
-          <label>SENHA 2</label>
-          <input 
-            placeholder="Acompanhante"
-            required
-            type="text"
-            name="ticket2"
-            value={form.ticket2}
-            onChange={onChangeForm}
-          />
-        </span>
-        <button className="btn confirm">Enviar</button>
-      </form>
+      <>
+        <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
+        <form onSubmit={handleClick}>
+          <span>
+            <label>SENHA 1</label>
+            <input 
+              placeholder="Seu nome"
+              required
+              type="text"
+              name="ticket1"
+              value={form.ticket1}
+              onChange={onChangeForm}
+            />
+          </span>
+          <span>
+            <label>SENHA 2</label>
+            <input 
+              placeholder="Acompanhante"
+              required
+              type="text"
+              name="ticket2"
+              value={form.ticket2}
+              onChange={onChangeForm}
+            />
+          </span>
+          <button className="btn confirm">Enviar</button>
+        </form>
+      </>
       :
       <>
-        <p>Você não poderá comparecer?</p>
+        <p>Eu &nbsp;<strong>NÃO</strong>&nbsp; poderei comparecer. &nbsp;<img src={sad}/></p>
         <form onSubmit={handleClick}>
           <button className="btn confirm">Enviar</button>
         </form>

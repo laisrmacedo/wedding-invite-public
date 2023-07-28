@@ -99,12 +99,6 @@ p{
   width: 80px;
   padding: 4px 10px;
   height: 24px;
-  
-  img{
-    width: 15px;
-    height: 15px;
-    filter: brightness(.9);
-  }
 }
 
 .title{
