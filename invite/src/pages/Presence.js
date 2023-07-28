@@ -35,6 +35,10 @@ const Main = styled.main`
     justify-content: center;
     gap: 12px;
     /* border: 1px solid blue; */
+    button{
+      height: 28px;
+      font-size: 14px;
+    }
     span{
       display: flex;
       justify-content: center;

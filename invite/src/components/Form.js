@@ -21,15 +21,17 @@ const Container = styled.div`
     filter: brightness(.9);
   }
   form{
+    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 8px;
     font-family: 'Dosis', sans-serif;
-    border: none;
     width: 100%;
-
+    button{
+      height: 24px;
+    }
     span{
       display: flex;
       justify-content: center;
