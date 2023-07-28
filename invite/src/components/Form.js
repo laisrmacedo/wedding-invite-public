@@ -1,9 +1,17 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-const Container = styled.form`
-    border: 1px solid red;
-    width: 100%;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* gap: 10px; */
+  /* border: 1px solid red; */
+  
+  form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,44 +19,53 @@ const Container = styled.form`
     gap: 8px;
     font-family: 'Dosis', sans-serif;
     border: none;
-    text-transform: uppercase;
-    text-decoration: none;
-    label{
-      font-size: 8px;
-    }
-    input{
-      width: 60%;
-      min-width: 210px;
-      background: transparent;
-      font-size: 12px;
-      border-radius: 8px;
-      border: 1px solid #492203;
-      padding: 4px 10px;
-      outline: none;
-    }
+    width: 100%;
+
     span{
-      width: 60%;
-      min-width: 210px;
-      height: 40px;
       display: flex;
-      justify-content: end;
-      align-items: end;
-      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      padding-top: 8px;
+      width: 100%;
+      max-width: 280px;
+      height: 40px;
     }
-    button{
-      padding: 4px 20px;
-      box-shadow: none;
-      margin: 0;
-    }
-    .cancel{
-      background: #f2f2f2;
-    }
-    .confirm{
-      color: #f2f2f2;
-      background: #56764C;
-    }
+  }
+  label{
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    font-size: 10px;
+    background: #D3D2D2;
+    padding: 0 4px;
+  }
+  input{
+    border: 1px solid #88593C;
+    height: 28px;
+    width: 100%;
+    background: transparent;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 4px 10px;
+    outline: none;
+  }
+  button{
+    padding: 4px;
+    width: 100px;
+    box-shadow: none;
+    margin: 14px 0 0 0;
+  }
+  .cancel{
+    background: #f2f2f2;
+  }
+  .confirm{
+    color: #f2f2f2;
+    background: ${(props) => props.response? '#56764C' : '#B93112'};
+  }
 `
-export const Form = (props) => {
+export const Form = ({response, toChangeDisplay}) => {
   const [form, setForm] = useState({
     ticket1: "",
     ticket2: ""
@@ -63,7 +80,10 @@ export const Form = (props) => {
   }
 
   return(
-    <Container>
+    <Container response={JSON.parse(response)}>
+      {JSON.parse(response) ? 
+      <form onSubmit={handleClick}>
+        <span>
           <label>SENHA 1</label>
           <input 
             placeholder="Seu nome"
@@ -72,7 +92,9 @@ export const Form = (props) => {
             name="ticket1"
             value={form.ticket1}
             onChange={onChangeForm}
-            />
+          />
+        </span>
+        <span>
           <label>SENHA 2</label>
           <input 
             placeholder="Acompanhante"
@@ -82,7 +104,20 @@ export const Form = (props) => {
             value={form.ticket2}
             onChange={onChangeForm}
           />
-          <button onSubmit={handleClick} className="btn confirm">Enviar</button>
+        </span>
+        <button className="btn confirm">Enviar</button>
+      </form>
+      :
+      <>
+        <p>Você não poderá comparecer?</p>
+        <form onSubmit={handleClick}>
+          <button className="btn confirm">Enviar</button>
+        </form>
+      </>
+    }
+
+    <button className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
+
     </Container>
   )
 }

@@ -21,22 +21,26 @@ const Main = styled.main`
     align-items: center;
     min-height: 40px;
   }
-  >div{
-    height: 50%;
-    overflow-y: auto;
-    width: 100%;
-  }
 
+  >div{
+    height: 40%;
+    width: 100%;
+    span{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
   #check{
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    width: 100%;
+    /* border: 1px solid blue; */
     span{
       display: flex;
       justify-content: center;
-      width: 100%;
+      height: 40px;
     }
   }
   p{
@@ -46,6 +50,7 @@ const Main = styled.main`
     text-transform: uppercase;
     font-size: 16px;
   }
+
   .visible{
     display: flex;
   }
@@ -58,23 +63,14 @@ export const Presence = () => {
   const {name, n} = useParams()
   const refactorName = name.replace('-', ' ')
 
-  const checkArea = document.querySelector('#check') 
-  const formYes = document.querySelector('#response-yes') 
-  const formNo = document.querySelector('#response-no')
+  const [displayCheck, setDisplayCheck] = useState('visible')
+  const [displayFormYes, setDisplayFormYes] = useState('hidden')
+  const [displayFormNo, setDisplayFormNo] = useState('hidden')
 
-  const toCheck = (response) => {
-    checkArea.setAttribute('class', 'hidden')
-    if(response === 'yes'){
-      formYes.setAttribute('class', 'visible')
-    }else{
-      formNo.setAttribute('class', 'visible')
-    }
-  }
-  
-  const toCancel = () => {
-    formYes.setAttribute('class', 'hidden')
-    formNo.setAttribute('class', 'hidden')
-    checkArea.setAttribute('class', 'visible')
+  const toChangeDisplay = (check, yes, no) => {
+    setDisplayCheck(check)
+    setDisplayFormYes(yes)
+    setDisplayFormNo(no)
   }
 
   return(
@@ -87,20 +83,19 @@ export const Presence = () => {
         </span>
 
         <div>
-          <span id="check" className="visible">
+          <span id="check" className={displayCheck}>
             <p>Você poderá comparecer?</p>
             <span>
-              <button className="btn checkBtn" onClick={() => toCheck('yes')}><img src={happy}/>SIM</button>
-              <button className="btn checkBtn" onClick={() => toCheck('no')}><img src={sad}/>NÃO</button>
+              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'visible', 'hidden')}><img src={happy}/>SIM</button>
+              <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'hidden', 'visible')}><img src={sad}/>NÃO</button>
             </span>
           </span>
-          <span id="response-yes" className="hidden">
-            <Form response={'yes'}/>
+          <span id="response-yes" className={displayFormYes}>
+            <Form response={"true"} toChangeDisplay={toChangeDisplay}/>
           </span>
-          <span id="response-no" className="hidden">
-            <Form response={'no'}/>
+          <span id="response-no" className={displayFormNo}>
+            <Form response={"false"} toChangeDisplay={toChangeDisplay}/>
           </span>
-          {/* <button onClick={() => toCancel} className="btn cancel">Cancelar</button> */}
         </div>
         {/* <p>Gostaríamos de contar com a sua presença no dia <strong>06 de janeiro de 2024</strong> para celebrarmos juntos essa nova fase de nossas vidas.</p> */}
         {/* <p>Por favor, confirme sua presença até [data] para que possamos organizar todos os preparativos com carinho e atenção aos detalhes. </p> */}
