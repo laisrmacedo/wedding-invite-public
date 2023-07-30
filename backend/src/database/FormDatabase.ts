@@ -21,23 +21,15 @@ abstract class BaseDatabase {
   })
 }
 
-export class PostsDatabase extends BaseDatabase{
+export class FormDatabase extends BaseDatabase{
   //attributes
   public static TABLE_GUESTS = "guests" //global constant
 
   //methods
-  public async getPosts(q: string | undefined){
-    let postsDB
-    if(q){
-      const result = await BaseDatabase
-      // .connection(PostsDatabase.TABLE_POSTS)
-      // .where("name", "LIKE", `%${q}%`)
-      postsDB = result
-    }else{
-      const result = await BaseDatabase
-      // .connection(PostsDatabase.TABLE_POSTS)
-      postsDB = result
-    }
-    return postsDB
+  public async getGuests(){
+    const guestDB = await BaseDatabase
+      .connection(FormDatabase.TABLE_GUESTS)
+
+    return guestDB
   }
 }

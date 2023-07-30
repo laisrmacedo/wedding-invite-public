@@ -14,4 +14,4 @@ app.listen(Number(process.env.EXPRESS_PORT), () => {
     console.log(`Server running on port ${Number(process.env.EXPRESS_PORT)}`)
 })
 
-app.use("/forms", formRouter)
+app.use("/guests", formRouter)
