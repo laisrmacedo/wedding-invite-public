@@ -20,6 +20,13 @@ const Container = styled.div`
     height: 18px;
     filter: brightness(.9);
   }
+  >span{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   form{
     /* border: 1px solid blue; */
     display: flex;
@@ -91,35 +98,75 @@ export const Form = ({response, toChangeDisplay}) => {
     e.preventDefault()
   }
 
+  class FormSubmit{
+    constructor(settings){
+      this.settings = settings
+      this.form = document.querySelector(settings.form)
+      this.formButton = document.querySelector(settings.button)
+      if(this.form){
+        this.url = this.form.getAttribute("action")
+      }
+    }
+
+    displaySuccess(){
+      this.form.innerHTML = this.settings.success
+    }
+
+    displayError(){
+      this.form.innerHTML = this.settings.error
+    }
+
+    init(){
+      if(this.form){
+        this.formButton.addEventListener("click", () => this.displaySuccess())
+        return this
+      }
+    }
+  }
+
+  const formSubmit = new FormSubmit({
+    form: "[data-form]",
+    button: "[data-button]",
+    success: "<p>Agradecemos o amor e o apoio que sempre recebemos. Estamos animados para celebrar nosso dia com vocês!</p>",
+    error: "<h1>deu erro</h1>"
+  })
+
+  formSubmit.init()
+
   return(
     <Container response={JSON.parse(response)}>
       {JSON.parse(response) ? 
       <>
-        <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
-        <form onSubmit={handleClick}>
+        <span>
+          <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
+        </span>
+        {/* https://formsubmit.co/ajax/laisrm00@gmail.com */}
+        <form action='' method='POST' data-form>
           <span>
-            <label>SENHA 1</label>
-            <input 
+            <label for="ticket-1">SENHA 1</label>
+            <input
+              id='ticket-1'
               placeholder="Seu nome"
               required
               type="text"
-              name="ticket1"
+              name="ticket-1"
               value={form.ticket1}
               onChange={onChangeForm}
-            />
+              />
           </span>
           <span>
-            <label>SENHA 2</label>
+            <label for="ticket-2">SENHA 2</label>
             <input 
+              id='ticket-2'
               placeholder="Acompanhante"
               required
               type="text"
-              name="ticket2"
+              name="ticket-2"
               value={form.ticket2}
               onChange={onChangeForm}
             />
           </span>
-          <button className="btn confirm">Enviar</button>
+          <button type="submit" className="btn confirm" data-button>Enviar</button>
         </form>
       </>
       :

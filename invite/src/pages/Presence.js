@@ -10,7 +10,7 @@ const Main = styled.main`
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  padding-bottom: 40px; 
+  padding-bottom: 30px; 
   position: relative;
   z-index: 1;
   .subtitle{
@@ -21,9 +21,9 @@ const Main = styled.main`
   }
 
   >div{
-    height: 50%;
+    height: 40%;
     width: 100%;
-    span{
+    >span{
       width: 100%;
       height: 100%;
     }
@@ -43,6 +43,11 @@ const Main = styled.main`
       display: flex;
       justify-content: center;
       height: 40px;
+    }
+    h3{
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 100;
     }
   }
   p{
@@ -82,10 +87,12 @@ export const Presence = () => {
         <h1>Confirme sua Presença</h1>
         <span className="subtitle">
           <p>Sua presença é essencial para tornar nosso casamento ainda mais <i>especial</i> e <i>memorável</i>.</p>
+          <p>Por favor, confirme sua presença até <strong>31/08/2023</strong> para que possamos organizar todos os preparativos com carinho e atenção aos detalhes. </p> 
         </span>
 
         <div>
           <span id="check" className={displayCheck}>
+            <h3>Reservamos &nbsp;<strong>2 senhas</strong>&nbsp; para você.</h3>
             <p>Você poderá comparecer?</p>
             <span>
               <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'visible', 'hidden')}>&#10003; &nbsp;SIM</button>
