@@ -21,6 +21,15 @@ abstract class BaseDatabase {
   })
 }
 
+export interface GuestDB {
+  id: string,
+  tickets: number,
+  created_at: string,
+  response: number | undefined,
+  guests_names: string | undefined,
+  replied_at: string | undefined
+}
+
 export class FormDatabase extends BaseDatabase{
   //attributes
   public static TABLE_GUESTS = "guests" //global constant
@@ -32,4 +41,18 @@ export class FormDatabase extends BaseDatabase{
 
     return guestDB
   }
+
+  public async insertGuest(guest: GuestDB): Promise<void> {
+    await BaseDatabase
+      .connection(FormDatabase.TABLE_GUESTS)
+      .insert(guest)
+  }
+
+  public async findGuestById(id: string): Promise<GuestDB | undefined> {
+    const [result]: GuestDB[] = await BaseDatabase
+        .connection(FormDatabase.TABLE_GUESTS)
+        .where({ id })
+
+    return result
+}
 }

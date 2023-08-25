@@ -3,9 +3,9 @@ CREATE TABLE guests (
   id TEXT PRIMARY KEY UNIQUE NOT NULL,
   tickets INTEGER NOT NULL,
   created_at TEXT NOT NULL,
-  response TEXT NOT NULL,
+  response INTEGER,
   guests_names TEXT,
-  replied_at TEXT NOT NULL
+  replied_at TEXT 
 );
 
 SELECT * FROM guests;
