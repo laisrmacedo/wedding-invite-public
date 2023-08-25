@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { Container } from '../components/Container'
 import { Header } from '../components/Header'
-import { Button } from '../components/Button'
-import whatsapp from '../assets/whatsapp.png'
-import pin from '../assets/pin.png'
 import { useEffect, useState } from 'react'
 import { BASE_URL } from '../App'
 import axios from "axios";
@@ -99,6 +96,7 @@ export const NewGuest = () => {
   const [disabledAddBtn, setDisabledAddBtn] = useState(true)
   const [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
   const [error, setError] = useState(null)
+  const [tickets, setTickets] = useState(0)
   const [form, setForm] = useState({
     guest: "",
     tickets: 0
@@ -113,6 +111,7 @@ export const NewGuest = () => {
   useEffect(() => {
     form.guest.length >= 5 ? setDisabledAddBtn(false) : setDisabledAddBtn(true)
     setDisabledDeleteBtn(true)
+    setError(null)
   }, [form])
 
   const handleClick = (e) => {
@@ -127,8 +126,12 @@ export const NewGuest = () => {
 
   const insertGuest = async () => {
     try {
-      const response = await axios.post(BASE_URL + `guests/new/`, body)
-      console.log(response)
+      await axios.post(BASE_URL + `guests/new/`, body)
+      setForm({
+        guest: "",
+        tickets: 0
+      })
+      getGuests()
     } catch (error) {
       console.log(error.response.data)
       setError(error.response.data)
@@ -140,9 +143,37 @@ export const NewGuest = () => {
     }
   }
 
+  const deleteGuest = async () => {
+    try {
+      await axios.delete(BASE_URL + `guests/${form.guest}/`)
+      setForm({
+        guest: "",
+        tickets: 0
+      })
+      getGuests()
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
+  const getGuests = async () => {
+    try {
+      const response = await axios.get(BASE_URL + `guests/`)
+      const sum = response.data.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.tickets
+      }, tickets)
+      setTickets(sum)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
+  useEffect(() => {
+    getGuests()
+  },[])
+
   const error1 = "ERROR: 'id' already exists."
   const error2 = "ERROR: 'tickets' field is mandatory."
-  const error3 = "ERROR: 'id' must be at least 5 characters."
 
   return (
     <Container>
@@ -161,7 +192,7 @@ export const NewGuest = () => {
                 name="guest"
                 value={form.guest}
                 onChange={onChangeForm}
-              />
+                />
               <select disabled={disabledAddBtn} name="tickets" id="tickets" value={form.tickets} onChange={onChangeForm}>
                 <option value="">0</option>
                 <option value="1">1</option>
@@ -172,16 +203,15 @@ export const NewGuest = () => {
                 <option value="6">6</option>
               </select>
             </div>
-            <span><p>{error}</p></span>
+            <span>
+              <p>{error === error1? "Este convidado já está cadastrado." : error === error2? "Informe a quantidade de senhas." : `${tickets} senhas cadastradas`}</p>
+            </span>
             <div>
               <button type="submit" disabled={disabledAddBtn} className="btn add">Adicionar</button>
-              <button type="button" disabled={disabledDeleteBtn} className="btn delete">Excluir</button>
+              <button type="button" disabled={disabledDeleteBtn} className="btn delete" onClick={() => deleteGuest()}>Excluir</button>
             </div>
           </form>
-
         </span>
-
-
       </Main>
     </Container>
   )
