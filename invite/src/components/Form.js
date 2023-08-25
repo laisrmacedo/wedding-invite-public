@@ -143,7 +143,7 @@ export const Form = ({response, toChangeDisplay}) => {
         {/* https://formsubmit.co/ajax/laisrm00@gmail.com */}
         <form action='' method='POST' data-form>
           <span>
-            <label for="ticket-1">SENHA 1</label>
+            <label htmlFor="ticket-1">SENHA 1</label>
             <input
               id='ticket-1'
               placeholder="Seu nome"
