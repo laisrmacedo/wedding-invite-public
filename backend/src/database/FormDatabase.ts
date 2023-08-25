@@ -54,5 +54,12 @@ export class FormDatabase extends BaseDatabase{
         .where({ id })
 
     return result
-}
+  }
+
+  public async deleteGuest(id: string): Promise<void> {
+    await BaseDatabase
+      .connection(FormDatabase.TABLE_GUESTS)
+      .del()
+      .where({ id })
+  }
 }

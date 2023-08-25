@@ -1,6 +1,7 @@
 import { FormDatabase, GuestDB } from "../database/FormDatabase";
-import { InsertGuestOutputDTO } from "../dto/FormDTO";
+import { DeleteGuestOutputDTO, InsertGuestOutputDTO } from "../dto/FormDTO";
 import { BadRequestError } from "../errors/BadRequestError";
+import { NotFoundError } from "../errors/NotFoundError";
 import { UnprocessableEntity } from "../errors/UnprocessableEntityError";
 import { Guest } from "../model/Guest";
 
@@ -47,5 +48,16 @@ export class FormBusiness{
     )
 
     await this.formDatabase.insertGuest(guestInstance.toDBModel())
+  }
+
+  public deleteGuest = async (input: DeleteGuestOutputDTO): Promise<void> => {
+    const {idToDelete} = input
+
+    const guestDB: GuestDB | undefined = await this.formDatabase.findGuestById(idToDelete)
+    if(!guestDB){
+      throw new NotFoundError("ERROR: 'idToDelete' not found.")
+    }
+
+    await this.formDatabase.deleteGuest(idToDelete)
   }
 }

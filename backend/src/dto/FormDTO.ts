@@ -5,6 +5,10 @@ export interface InsertGuestOutputDTO {
   tickets: number
 }
 
+export interface DeleteGuestOutputDTO {
+  idToDelete: string
+}
+
 export class GuestDTO {
   public insertGuestInputDTO(
     id: unknown,
@@ -28,6 +32,24 @@ export class GuestDTO {
     const dto = {
       id,
       tickets
+    }
+
+    return dto
+  }
+
+  public deleteGuestInputDTO(
+    idToDelete: unknown
+  ):DeleteGuestOutputDTO{
+
+    if (!idToDelete ||  idToDelete === "") {
+      throw new BadRequestError("ERROR: 'idToDelete' field is mandatory.")
+    }
+    if (typeof idToDelete !== "string") {
+      throw new BadRequestError("ERROR: 'idToDelete' must be of type string.")
+    }
+
+    const dto = {
+      idToDelete
     }
 
     return dto
