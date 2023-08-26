@@ -1,15 +1,19 @@
-export const goToHome = (navigate, name, n) => {
-  navigate(`/${name}/${n}`)
+export const goToHome = (navigate, name) => {
+  navigate(`/${name}`)
 }
 
-export const goToLocation = (navigate, name, n) => {
-  navigate(`/${name}/${n}/local`)
+export const goToLocation = (navigate, name) => {
+  navigate(`/${name}/local`)
 }
 
-export const goToGift = (navigate, name, n) => {
-  navigate(`/${name}/${n}/presentes`)
+export const goToGift = (navigate, name) => {
+  navigate(`/${name}/presentes`)
 }
 
-export const goToCheck = (navigate, name, n) => {
-  navigate(`/${name}/${n}/confirmacao`)
+export const goToCheck = (navigate, name) => {
+  navigate(`/${name}/confirmacao`)
+}
+
+export const goToError = (navigate) => {
+  navigate('/')
 }

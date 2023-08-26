@@ -6,7 +6,10 @@ import check from "../assets/check.png";
 import gift from "../assets/gift.png";
 import { Button } from '../components/Button';
 import { useNavigate, useParams } from 'react-router-dom'
-import { goToCheck, goToGift, goToLocation } from '../router/coordinator';
+import { goToCheck, goToError, goToGift, goToLocation } from '../router/coordinator';
+import { BASE_URL } from '../App';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const Main = styled.main`
     flex-direction: column;
@@ -28,7 +31,23 @@ const Main = styled.main`
 
 export const Home = () => {
   const navigate = useNavigate()
-  const {name, n} = useParams()
+  const {name} = useParams()
+
+  const getGuests = async () => {
+    try {
+      const response = await axios.get(BASE_URL + `guests/`)
+      const [foundGuest] = response.data.filter((guest) => guest.id === name)
+      if(!foundGuest){
+        goToError(navigate)
+      }
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
+  useEffect(() => {
+    getGuests()
+  }, [])
 
   return(
     <Container>
@@ -42,9 +61,9 @@ export const Home = () => {
           06 &nbsp;| &nbsp;JANEIRO&nbsp; | &nbsp;2024&nbsp; |&nbsp; 16H
         </h2>
         <div className="icons">
-          <Button onClick={() => goToLocation(navigate, name, n)} img={location} text={"Local"}/>
-          <Button onClick={() => goToGift(navigate, name, n)} img={gift} text={"Presentes"}/>
-          <Button onClick={() => goToCheck(navigate, name, n)} img={check} text={"Confirmação de presença"}/>
+          <Button onClick={() => goToLocation(navigate, name)} img={location} text={"Local"}/>
+          <Button onClick={() => goToGift(navigate, name)} img={gift} text={"Presentes"}/>
+          <Button onClick={() => goToCheck(navigate, name)} img={check} text={"Confirmação de presença"}/>
         </div>
       </Main>
     </Container>
