@@ -7,7 +7,7 @@ export class Guest {
     private tickets: number,
     private createdAt: string, 
     private response: number | undefined,
-    private guestsNames: string | undefined,
+    private guestsNames: string | null,
     private repliedAt: string | undefined
   ){}
 
@@ -30,10 +30,10 @@ export class Guest {
     this.response = value
   }
 
-  public getGuestsNames():string | undefined{
+  public getGuestsNames():string | null{
     return this.guestsNames
   }
-  public setGuestsNames(value: string): void{
+  public setGuestsNames(value: string | null): void{
     this.guestsNames = value
   }
   

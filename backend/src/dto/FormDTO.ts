@@ -71,8 +71,12 @@ export class GuestDTO {
       throw new BadRequestError("ERROR: report the id of the user to be edited.")
     }
 
-    if (response !== undefined || typeof response !== "boolean") {
+    if (response === undefined || typeof response !== "boolean") {
       throw new BadRequestError("ERROR: 'response' must be of type boolean.")
+    }
+    
+    if(response && guestsNames === undefined){
+      throw new BadRequestError("ERROR: 'guestsNames' field is mandatory.")
     }
 
     if (guestsNames !== undefined && typeof guestsNames !== "string") {

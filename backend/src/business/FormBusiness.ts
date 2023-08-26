@@ -10,7 +10,7 @@ export interface GuestBusinessModel {
   tickets: number,
   createdAt: string,
   response: number | undefined,
-  guestsNames: string | undefined,
+  guestsNames: string | null,
   repliedAt: string | undefined
 }
 
@@ -43,7 +43,7 @@ export class FormBusiness{
       tickets,
       new Date().toISOString(),
       undefined,
-      undefined,
+      null,
       undefined
     )
 
@@ -79,8 +79,10 @@ export class FormBusiness{
     )
 
     guestInstance.setResponse(response? 1 : 0)
-    if(guestsNames){
+    if(response && guestsNames){
       guestInstance.setGuestsNames(guestsNames)
+    }else{
+      guestInstance.setGuestsNames(null)
     }
     guestInstance.setRepliedAt(new Date().toISOString())
 

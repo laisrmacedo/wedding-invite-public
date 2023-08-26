@@ -16,3 +16,4 @@ const formController = new FormController(
 formRouter.get("/", formController.getGuests)
 formRouter.post("/new", formController.insertGuest)
 formRouter.delete("/:id", formController.deleteGuest)
+formRouter.put("/:id", formController.editGuest)

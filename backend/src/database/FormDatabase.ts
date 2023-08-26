@@ -26,7 +26,7 @@ export interface GuestDB {
   tickets: number,
   created_at: string,
   response: number | undefined,
-  guests_names: string | undefined,
+  guests_names: string | null,
   replied_at: string | undefined
 }
 

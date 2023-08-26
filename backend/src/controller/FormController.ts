@@ -62,4 +62,25 @@ export class FormController {
       }
     }
   }
+
+  public editGuest = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const input = this.guestDTO.editGuestInputDTO(
+        req.params.id,
+        req.body.response,
+        req.body.guestsName
+      )
+
+      await this.formBusiness.editGuest(input)
+      res.status(200).end()
+
+    } catch (error) {
+      console.log(error)
+      if (error instanceof BaseError) {
+        res.status(error.statusCode).send(error.message)
+      } else {
+        res.send("Unexpected error")
+      }
+    }
+  }
 }
