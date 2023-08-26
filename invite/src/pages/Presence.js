@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import { Header } from "../components/Header"
 import { useParams } from "react-router-dom"
 import whatsapp from '../assets/whatsapp.png'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Form } from "../components/Form"
+import axios from "axios"
+import { BASE_URL } from "../App"
 
 const Main = styled.main`
   flex-direction: column;
-  gap: 20px;
+  justify-content: space-between;
   align-items: center;
-  padding-bottom: 30px; 
+  padding-bottom: 10px; 
   position: relative;
   z-index: 1;
   .subtitle{
@@ -18,6 +20,9 @@ const Main = styled.main`
     flex-direction: column;
     align-items: center;
     min-height: 40px;
+    p{
+      font-size: 14px;
+    }
   }
 
   >div{
@@ -67,18 +72,39 @@ const Main = styled.main`
 `
 
 export const Presence = () => {
-  const {name, n} = useParams()
+  const {name} = useParams()
   const refactorName = name.replace('-', ' ')
 
   const [displayCheck, setDisplayCheck] = useState('visible')
   const [displayFormYes, setDisplayFormYes] = useState('hidden')
   const [displayFormNo, setDisplayFormNo] = useState('hidden')
+  const [guest, setGuest] = useState(null)
+  const [allGuests, setAllGuests] = useState(undefined)
 
   const toChangeDisplay = (check, yes, no) => {
     setDisplayCheck(check)
     setDisplayFormYes(yes)
     setDisplayFormNo(no)
   }
+
+  const getGuests = async () => {
+    try {
+      const response = await axios.get(BASE_URL + `guests/`)
+      setAllGuests(response.data)
+      const [foundGuest] = response.data.filter((guest) => guest.id === name)
+      setGuest(foundGuest)
+      console.log(allGuests)
+      // if(!foundGuest){
+      //   goToError(navigate)
+      // }
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
+  useEffect(() => {
+    getGuests()
+  }, [])
 
   return(
     <Container>
@@ -92,7 +118,7 @@ export const Presence = () => {
 
         <div>
           <span id="check" className={displayCheck}>
-            <h3>Reservamos &nbsp;<strong>2 senhas</strong>&nbsp; para você.</h3>
+            <h3>Reservamos &nbsp;<strong>{`${guest?.tickets}`} senhas</strong>&nbsp; para você.</h3>
             <p>Você poderá comparecer?</p>
             <span>
               <button className="btn checkBtn" onClick={() => toChangeDisplay('hidden', 'visible', 'hidden')}>&#10003; &nbsp;SIM</button>
@@ -100,18 +126,12 @@ export const Presence = () => {
             </span>
           </span>
           <span id="response-yes" className={displayFormYes}>
-            <Form response={"true"} toChangeDisplay={toChangeDisplay}/>
+            <Form response={"true"} guest={guest} toChangeDisplay={toChangeDisplay}/>
           </span>
           <span id="response-no" className={displayFormNo}>
             <Form response={"false"} toChangeDisplay={toChangeDisplay}/>
           </span>
         </div>
-        {/* <p>Gostaríamos de contar com a sua presença no dia <strong>06 de janeiro de 2024</strong> para celebrarmos juntos essa nova fase de nossas vidas.</p> */}
-        {/* <p>Por favor, confirme sua presença até [data] para que possamos organizar todos os preparativos com carinho e atenção aos detalhes. </p> */}
-
-
-        {/* <p>Agradecemos desde já o amor e apoio que sempre nos deram. Mal podemos esperar para celebrar com vocês!</p> */}
-
         <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
       </Main>
     </Container>

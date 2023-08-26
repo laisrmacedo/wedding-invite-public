@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import sad from '../assets/sad.png'
 import happy from '../assets/happy.png'
@@ -12,8 +12,8 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   p{
-    margin-bottom: 20px;
-    font-size: 18px;
+    margin-bottom: 12px;
+    font-size: 16px;
   }
   img{
     width: 18px;
@@ -28,7 +28,6 @@ const Container = styled.div`
     align-items: center;
   }
   form{
-    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,16 +38,26 @@ const Container = styled.div`
     button{
       height: 24px;
     }
-    span{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
-      padding-top: 8px;
+    div{
+      /* border: 1px solid blue; */
+      max-height: 170px;
       width: 100%;
       max-width: 280px;
-      height: 40px;
+      overflow-y: auto;
+      span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        padding-top: 8px;
+        width: 100%;
+        height: 40px;
+      }
+    }
+    >span{
+      display: flex;
+      gap: 12px;
     }
   }
   label{
@@ -84,7 +93,7 @@ const Container = styled.div`
     background: ${(props) => props.response? '#56764C' : '#B93112'};
   }
 `
-export const Form = ({response, toChangeDisplay}) => {
+export const Form = ({response, guest, toChangeDisplay}) => {
   const [form, setForm] = useState({
     ticket1: "",
     ticket2: ""
@@ -97,42 +106,7 @@ export const Form = ({response, toChangeDisplay}) => {
   const handleClick = (e) => {
     e.preventDefault()
   }
-
-  class FormSubmit{
-    constructor(settings){
-      this.settings = settings
-      this.form = document.querySelector(settings.form)
-      this.formButton = document.querySelector(settings.button)
-      if(this.form){
-        this.url = this.form.getAttribute("action")
-      }
-    }
-
-    displaySuccess(){
-      this.form.innerHTML = this.settings.success
-    }
-
-    displayError(){
-      this.form.innerHTML = this.settings.error
-    }
-
-    init(){
-      if(this.form){
-        this.formButton.addEventListener("click", () => this.displaySuccess())
-        return this
-      }
-    }
-  }
-
-  const formSubmit = new FormSubmit({
-    form: "[data-form]",
-    button: "[data-button]",
-    success: "<p>Agradecemos o amor e o apoio que sempre recebemos. Estamos animados para celebrar nosso dia com vocês!</p>",
-    error: "<h1>deu erro</h1>"
-  })
-
-  formSubmit.init()
-
+  
   return(
     <Container response={JSON.parse(response)}>
       {JSON.parse(response) ? 
@@ -140,46 +114,42 @@ export const Form = ({response, toChangeDisplay}) => {
         <span>
           <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
         </span>
-        {/* https://formsubmit.co/ajax/laisrm00@gmail.com */}
-        <form action='' method='POST' data-form>
+        <form>
+          <div>
+            {new Array(guest?.tickets).fill().map((_, index) => {
+              return (
+                <span key={index}>
+                    <label htmlFor={"ticket-"+index}>SENHA {`${index + 1}`}</label>
+                    <input
+                      id='ticket-1'
+                      placeholder={index === 0? "Seu nome" : "Acompanhante"}
+                      required
+                      type="text"ƒ
+                      name="ticket-1"
+                      value={form.ticket1}
+                      onChange={onChangeForm}
+                    />
+                  </span>
+              )
+            })}
+          </div>
           <span>
-            <label htmlFor="ticket-1">SENHA 1</label>
-            <input
-              id='ticket-1'
-              placeholder="Seu nome"
-              required
-              type="text"
-              name="ticket-1"
-              value={form.ticket1}
-              onChange={onChangeForm}
-              />
+            <button type="button" className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
+            <button type="submit" className="btn confirm" data-button>Enviar</button>
           </span>
-          <span>
-            <label for="ticket-2">SENHA 2</label>
-            <input 
-              id='ticket-2'
-              placeholder="Acompanhante"
-              required
-              type="text"
-              name="ticket-2"
-              value={form.ticket2}
-              onChange={onChangeForm}
-            />
-          </span>
-          <button type="submit" className="btn confirm" data-button>Enviar</button>
         </form>
       </>
       :
       <>
         <p>Eu &nbsp;<strong>NÃO</strong>&nbsp; poderei comparecer. &nbsp;<img src={sad}/></p>
         <form onSubmit={handleClick}>
-          <button className="btn confirm">Enviar</button>
+          <span>
+            <button type="button" className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
+            <button className="btn confirm">Enviar</button>
+          </span>
         </form>
       </>
     }
-
-    <button className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
-
     </Container>
   )
 }
