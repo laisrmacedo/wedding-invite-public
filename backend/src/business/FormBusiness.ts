@@ -1,5 +1,5 @@
 import { FormDatabase, GuestDB } from "../database/FormDatabase";
-import { DeleteGuestOutputDTO, InsertGuestOutputDTO } from "../dto/FormDTO";
+import { DeleteGuestOutputDTO, EditGuestOutputDTO, InsertGuestOutputDTO } from "../dto/FormDTO";
 import { BadRequestError } from "../errors/BadRequestError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnprocessableEntity } from "../errors/UnprocessableEntityError";
@@ -59,5 +59,40 @@ export class FormBusiness{
     }
 
     await this.formDatabase.deleteGuest(idToDelete)
+  }
+
+  public editGuest = async (input: EditGuestOutputDTO): Promise<void> => {
+    const { idToEdit, response, guestsNames } = input
+
+    const foundGuest = await this.formDatabase.findGuestById(idToEdit)
+    if(!foundGuest){
+        throw new NotFoundError("ERROR: 'idToEdit' not found.")
+    }
+
+    const guestInstance = new Guest(
+        foundGuest.id,
+        foundGuest.tickets,
+        foundGuest.created_at,
+        foundGuest.response,
+        foundGuest.guests_names,
+        foundGuest.replied_at,
+    )
+
+    guestInstance.setResponse(response? 1 : 0)
+    if(guestsNames){
+      guestInstance.setGuestsNames(guestsNames)
+    }
+    guestInstance.setRepliedAt(new Date().toISOString())
+
+    const newGuest: GuestDB = {
+        id: guestInstance.getId(), 
+        tickets: guestInstance.getTickets(),
+        created_at: guestInstance.getCreatedAt(),
+        response: guestInstance.getResponse(), 
+        guests_names: guestInstance.getGuestsNames(),
+        replied_at: guestInstance.getRepliedAt()
+    }
+
+    await this.formDatabase.updateGuest(idToEdit, newGuest)
   }
 }

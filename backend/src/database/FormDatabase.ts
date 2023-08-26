@@ -62,4 +62,11 @@ export class FormDatabase extends BaseDatabase{
       .del()
       .where({ id })
   }
+
+  public async updateGuest(id: string, updatedUser: GuestDB): Promise<void> {
+    await BaseDatabase
+      .connection(FormDatabase.TABLE_GUESTS)
+      .update(updatedUser)
+      .where({ id })
+  }
 }

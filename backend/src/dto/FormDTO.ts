@@ -9,6 +9,12 @@ export interface DeleteGuestOutputDTO {
   idToDelete: string
 }
 
+export interface EditGuestOutputDTO {
+  idToEdit: string,
+  response: boolean,
+  guestsNames: string | undefined
+}
+
 export class GuestDTO {
   public insertGuestInputDTO(
     id: unknown,
@@ -54,4 +60,32 @@ export class GuestDTO {
 
     return dto
   }
+
+  public editGuestInputDTO(
+    idToEdit: string,
+    response: unknown,
+    guestsNames: unknown
+  ): EditGuestOutputDTO{
+
+    if(idToEdit === ":id"){
+      throw new BadRequestError("ERROR: report the id of the user to be edited.")
+    }
+
+    if (response !== undefined || typeof response !== "boolean") {
+      throw new BadRequestError("ERROR: 'response' must be of type boolean.")
+    }
+
+    if (guestsNames !== undefined && typeof guestsNames !== "string") {
+      throw new BadRequestError("ERROR: 'guestsNames' must be of type string.")
+    }
+
+    const dto: EditGuestOutputDTO = {
+      idToEdit,
+      response,
+      guestsNames
+    }
+
+    return dto
+  }
 }
+
