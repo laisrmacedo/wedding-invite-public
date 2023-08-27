@@ -68,7 +68,7 @@ export class FormController {
       const input = this.guestDTO.editGuestInputDTO(
         req.params.id,
         req.body.response,
-        req.body.guestsName
+        req.body.guestNames
       )
 
       await this.formBusiness.editGuest(input)

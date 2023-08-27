@@ -10,7 +10,7 @@ export interface GuestBusinessModel {
   tickets: number,
   createdAt: string,
   response: number | undefined,
-  guestsNames: string | null,
+  guestNames: string | null,
   repliedAt: string | undefined
 }
 
@@ -62,7 +62,7 @@ export class FormBusiness{
   }
 
   public editGuest = async (input: EditGuestOutputDTO): Promise<void> => {
-    const { idToEdit, response, guestsNames } = input
+    const { idToEdit, response, guestNames } = input
 
     const foundGuest = await this.formDatabase.findGuestById(idToEdit)
     if(!foundGuest){
@@ -74,15 +74,15 @@ export class FormBusiness{
         foundGuest.tickets,
         foundGuest.created_at,
         foundGuest.response,
-        foundGuest.guests_names,
+        foundGuest.guest_names,
         foundGuest.replied_at,
     )
 
     guestInstance.setResponse(response? 1 : 0)
-    if(response && guestsNames){
-      guestInstance.setGuestsNames(guestsNames)
+    if(response && guestNames){
+      guestInstance.setGuestNames(guestNames)
     }else{
-      guestInstance.setGuestsNames(null)
+      guestInstance.setGuestNames(null)
     }
     guestInstance.setRepliedAt(new Date().toISOString())
 
@@ -91,7 +91,7 @@ export class FormBusiness{
         tickets: guestInstance.getTickets(),
         created_at: guestInstance.getCreatedAt(),
         response: guestInstance.getResponse(), 
-        guests_names: guestInstance.getGuestsNames(),
+        guest_names: guestInstance.getGuestNames(),
         replied_at: guestInstance.getRepliedAt()
     }
 

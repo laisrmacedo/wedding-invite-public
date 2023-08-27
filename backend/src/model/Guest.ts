@@ -7,7 +7,7 @@ export class Guest {
     private tickets: number,
     private createdAt: string, 
     private response: number | undefined,
-    private guestsNames: string | null,
+    private guestNames: string | null,
     private repliedAt: string | undefined
   ){}
 
@@ -30,11 +30,11 @@ export class Guest {
     this.response = value
   }
 
-  public getGuestsNames():string | null{
-    return this.guestsNames
+  public getGuestNames():string | null{
+    return this.guestNames
   }
-  public setGuestsNames(value: string | null): void{
-    this.guestsNames = value
+  public setGuestNames(value: string | null): void{
+    this.guestNames = value
   }
   
   public getRepliedAt():string | undefined{
@@ -50,7 +50,7 @@ export class Guest {
       tickets: this.tickets,
       created_at: this.createdAt,
       response: this.response,
-      guests_names: this.guestsNames,
+      guest_names: this.guestNames,
       replied_at: this.repliedAt
     }
   }
@@ -61,7 +61,7 @@ export class Guest {
       tickets: this.tickets,
       createdAt: this.createdAt,
       response: this.response,
-      guestsNames: this.guestsNames,
+      guestNames: this.guestNames,
       repliedAt: this.repliedAt
     }
   }

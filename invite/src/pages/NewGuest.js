@@ -105,7 +105,6 @@ export const NewGuest = () => {
   const onChangeForm = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
-    console.log(form.guest.length)
   }
   
   useEffect(() => {
@@ -161,7 +160,7 @@ export const NewGuest = () => {
       const response = await axios.get(BASE_URL + `guests/`)
       const sum = response.data.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.tickets
-      }, tickets)
+      }, 0)
       setTickets(sum)
     } catch (error) {
       console.log(error.response.data)

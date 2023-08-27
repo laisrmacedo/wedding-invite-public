@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import sad from '../assets/sad.png'
 import happy from '../assets/happy.png'
+import axios from 'axios'
+import { BASE_URL } from '../App'
+import { useParams } from 'react-router-dom'
 
 
 const Container = styled.div`
@@ -27,7 +30,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
-  form{
+  .form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,61 +96,73 @@ const Container = styled.div`
     background: ${(props) => props.response? '#56764C' : '#B93112'};
   }
 `
-export const Form = ({response, guest, toChangeDisplay}) => {
+export const Form = ({response, setResponse, guest}) => {
+  const {name} = useParams()
   const [form, setForm] = useState({
+    ticket0: "",
     ticket1: "",
-    ticket2: ""
+    ticket2: "",
+    ticket3: "",
+    ticket4: "",
+    ticket5: ""
   })
   const onChangeForm = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
   }
 
-  const handleClick = (e) => {
-    e.preventDefault()
+  let guestNames = `${form.ticket0}, ${form.ticket1}, ${form.ticket2}, ${form.ticket3}, ${form.ticket4}, ${form.ticket5}`
+
+  const editGuest = async (boolean) => {
+    try {
+      await axios.put(BASE_URL + `guests/${name}`, {response: boolean, guestNames: boolean? guestNames : undefined})
+      setResponse(undefined)
+    } catch (error) {
+      console.log(error.response.data)
+    }
   }
   
   return(
-    <Container response={JSON.parse(response)}>
-      {JSON.parse(response) ? 
+    <Container response={response}>
+      {response ? 
       <>
         <span>
           <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
         </span>
-        <form>
+        <form className='form' onSubmit={() => editGuest(true)}>
           <div>
             {new Array(guest?.tickets).fill().map((_, index) => {
               return (
                 <span key={index}>
-                    <label htmlFor={"ticket-"+index}>SENHA {`${index + 1}`}</label>
-                    <input
-                      id='ticket-1'
-                      placeholder={index === 0? "Seu nome" : "Acompanhante"}
-                      required
-                      type="text"ƒ
-                      name="ticket-1"
-                      value={form.ticket1}
-                      onChange={onChangeForm}
-                    />
-                  </span>
+                  <label htmlFor={"ticket-"+index}>SENHA {`${index + 1}`}</label>
+                  <input
+                    id={"ticket-"+index}
+                    placeholder={index === 0? "Seu nome" : "Acompanhante"}
+                    required
+                    type="text"
+                    name={"ticket"+index}
+                    value={form[`ticket${index}`]}
+                    onChange={onChangeForm}
+                  />
+                </span>
               )
             })}
           </div>
           <span>
-            <button type="button" className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
-            <button type="submit" className="btn confirm" data-button>Enviar</button>
+            <button type="button" className="btn cancel" onClick={() => setResponse(null)}>Cancelar</button>
+            <button type="submit" className="btn confirm">Enviar</button>
           </span>
         </form>
       </>
       :
       <>
         <p>Eu &nbsp;<strong>NÃO</strong>&nbsp; poderei comparecer. &nbsp;<img src={sad}/></p>
-        <form onSubmit={handleClick}>
+        <div className='form'>
           <span>
-            <button type="button" className="btn cancel" onClick={() => toChangeDisplay('visible', 'hidden', 'hidden')}>Cancelar</button>
-            <button className="btn confirm">Enviar</button>
+            <button type="button" className="btn cancel" onClick={() => setResponse(null)}>Cancelar</button>
+            <button type="button" className="btn confirm" onClick={() => editGuest(false)}>Enviar</button>
           </span>
-        </form>
+        </div>
       </>
     }
     </Container>

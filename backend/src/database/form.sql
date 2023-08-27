@@ -4,7 +4,7 @@ CREATE TABLE guests (
   tickets INTEGER NOT NULL,
   created_at TEXT NOT NULL,
   response INTEGER,
-  guests_names TEXT,
+  guest_names TEXT,
   replied_at TEXT 
 );
 
