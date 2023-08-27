@@ -52,7 +52,7 @@ h2{
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  width: 70%;
+  /* width: 70%; */
   font-family: 'Dosis', sans-serif;
 }
 h3{
