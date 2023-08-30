@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import background from "../assets/background.jpeg";
-
+import backgroundImage from "../assets/background.jpeg";
+import { useEffect, useState } from 'react';
 
 const Content = styled.div`
   width: 100vw;
@@ -9,8 +9,12 @@ const Content = styled.div`
   justify-content: center;
   align-items: start;
   padding: 10px;
-  /* border: 1px solid red; */
   position: relative;
+  background-color: #D3D2D2;
+  .transition{
+    opacity: ${(props) => props.loaded? 1 : 0}; 
+    transition: opacity 2s ease-in-out;
+  }
   .background{
     position: absolute;
     top: 0;
@@ -24,13 +28,22 @@ const Content = styled.div`
       filter: saturate(0.5);
     }
   }
+  .loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 `
 
 export const Container = (props) => {
+  const [loaded, isLoaded] = useState(false)
+  useEffect(() => isLoaded(true), [])
+
   return(
-    <Content>
-      <div className='background'>
-        <img src={background}/>
+    <Content loaded={loaded}>
+      <div className='background transition'>
+        <img src={backgroundImage}/>
       </div>
       {props.children}
     </Content>
