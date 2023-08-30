@@ -31,13 +31,14 @@ abstract class BaseDatabase {
       const sqlFilePath = path.join(__dirname, 'form.sql'); // Substitua com o caminho correto
       const sql = fs.readFileSync(sqlFilePath).toString();
       
-      await conn.raw(sql);
+      await this.connection.schema.raw(sql); // Usando knex.schema.raw
       console.log('Tabela criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar a tabela:', error);
     }
   }
 }
+
 
 
 
