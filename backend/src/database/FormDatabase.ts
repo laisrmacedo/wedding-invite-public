@@ -11,16 +11,19 @@ abstract class BaseDatabase {
   private static migrationExecuted = false;
 
   protected static connection = knex({
-    client: "sqlite3",
+    client: "pg", 
     connection: {
-      filename: process.env.DB_FILE_PATH as string,
+      host: process.env.DB_HOST as string,
+      port: Number(process.env.DB_PORT),
+      user: process.env.DB_USER as string,
+      password: process.env.DB_PASSWORD as string,
+      database: process.env.DB_NAME as string,
     },
-    useNullAsDefault: true,
     pool: { 
       min: 0,
       max: 1,
       afterCreate: (conn: any, cb: any) => {
-        conn.run("PRAGMA foreign_keys = ON", () => {
+        conn.query("SET timezone='UTC';", () => { // Configuração específica para PostgreSQL
           if (!this.migrationExecuted) {
             this.runMigrations(conn);
             this.migrationExecuted = true;
@@ -33,16 +36,17 @@ abstract class BaseDatabase {
 
   private static async runMigrations(conn: any) {
     try {
-      const sqlFilePath = path.join(__dirname, 'form.sql');
+      const sqlFilePath = path.join(__dirname, 'form.sql'); 
       const sql = fs.readFileSync(sqlFilePath).toString();
       
-      await this.connection.schema.raw(sql);
+      await this.connection.schema.raw(sql); 
       console.log('Tabela criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar a tabela:', error);
     }
   }
 }
+
 
 export interface GuestDB {
   id: string,
