@@ -8,6 +8,8 @@ import * as path from 'path';
 import knex from 'knex';
 
 abstract class BaseDatabase {
+  private static migrationExecuted = false;
+
   protected static connection = knex({
     client: "sqlite3",
     connection: {
@@ -19,7 +21,10 @@ abstract class BaseDatabase {
       max: 1,
       afterCreate: (conn: any, cb: any) => {
         conn.run("PRAGMA foreign_keys = ON", () => {
-          this.runMigrations(conn);
+          if (!this.migrationExecuted) {
+            this.runMigrations(conn);
+            this.migrationExecuted = true;
+          }
           cb();
         });
       }
@@ -28,36 +33,16 @@ abstract class BaseDatabase {
 
   private static async runMigrations(conn: any) {
     try {
-      const sqlFilePath = path.join(__dirname, 'form.sql'); // Substitua com o caminho correto
+      const sqlFilePath = path.join(__dirname, 'form.sql');
       const sql = fs.readFileSync(sqlFilePath).toString();
       
-      await this.connection.schema.raw(sql); // Usando knex.schema.raw
+      await this.connection.schema.raw(sql);
       console.log('Tabela criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar a tabela:', error);
     }
   }
 }
-
-
-
-
-// abstract class BaseDatabase {
-//   protected static connection = knex({
-//       client: "sqlite3",
-//       connection: {
-//           filename: process.env.DB_FILE_PATH as string,
-//       },
-//       useNullAsDefault: true,
-//       pool: { 
-//           min: 0,
-//           max: 1,
-//           afterCreate: (conn: any, cb: any) => {
-//               conn.run("PRAGMA foreign_keys = ON", cb)
-//           }
-//       }
-//   })
-// }
 
 export interface GuestDB {
   id: string,
