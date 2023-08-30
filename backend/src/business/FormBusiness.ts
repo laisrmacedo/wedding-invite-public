@@ -40,7 +40,7 @@ export class FormBusiness{
     }
 
     const guestInstance = new Guest(
-      id.toLocaleLowerCase().trim().replace(" ", "-"),
+      id,
       tickets,
       new Date().toISOString(),
       undefined,
