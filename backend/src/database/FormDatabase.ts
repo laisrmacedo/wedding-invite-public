@@ -42,7 +42,8 @@ abstract class BaseDatabase {
       const sql = fs.readFileSync(sqlFilePath).toString();
       console.log('SQL Content:', sql); // Verifique o conteúdo do SQL
       
-      await this.connection.schema.raw(sql);
+      await this.connection.raw(sql); // Usando knex.raw
+
       console.log('Tabela criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar a tabela:', error);
