@@ -4,22 +4,59 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 //SQLite3
+import * as fs from 'fs';
+import * as path from 'path';
+
 abstract class BaseDatabase {
   protected static connection = knex({
-      client: "sqlite3",
-      connection: {
-          filename: process.env.DB_FILE_PATH as string,
-      },
-      useNullAsDefault: true,
-      pool: { 
-          min: 0,
-          max: 1,
-          afterCreate: (conn: any, cb: any) => {
-              conn.run("PRAGMA foreign_keys = ON", cb)
-          }
+    client: "sqlite3",
+    connection: {
+      filename: process.env.DB_FILE_PATH as string,
+    },
+    useNullAsDefault: true,
+    pool: { 
+      min: 0,
+      max: 1,
+      afterCreate: (conn: any, cb: any) => {
+        conn.run("PRAGMA foreign_keys = ON", cb);
       }
-  })
+    }
+  });
+
+  constructor() {
+    this.runMigrations();
+  }
+
+  private async runMigrations() {
+    try {
+      const sqlFilePath = path.join(__dirname, 'database', 'form.sql');
+      const sql = fs.readFileSync(sqlFilePath).toString();
+      
+      await BaseDatabase.connection.raw(sql);
+      console.log('Tabela criada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao criar a tabela:', error);
+    }
+  }
 }
+
+
+// abstract class BaseDatabase {
+//   protected static connection = knex({
+//       client: "sqlite3",
+//       connection: {
+//           filename: process.env.DB_FILE_PATH as string,
+//       },
+//       useNullAsDefault: true,
+//       pool: { 
+//           min: 0,
+//           max: 1,
+//           afterCreate: (conn: any, cb: any) => {
+//               conn.run("PRAGMA foreign_keys = ON", cb)
+//           }
+//       }
+//   })
+// }
 
 export interface GuestDB {
   id: string,
