@@ -28,7 +28,7 @@ abstract class BaseDatabase {
 
   private static async runMigrations(conn: any) {
     try {
-      const sqlFilePath = path.join(__dirname, 'src', 'database', 'form.sql'); // Substitua com o caminho correto
+      const sqlFilePath = path.join(__dirname, 'form.sql'); // Substitua com o caminho correto
       const sql = fs.readFileSync(sqlFilePath).toString();
       
       await conn.raw(sql);
