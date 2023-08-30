@@ -51,12 +51,12 @@ export const Gift = () => {
           <h1>Sobre Presentes</h1>
           <p>Pensando na praticidade e conveniência, gostaríamos de sugerir que o envio de presentes seja em forma de <strong>transferência via Pix</strong>. Essa opção facilitará o processo para todos e nos permitirá utilizar seu presente de maneira significativa em nossa nova vida juntos, já que estamos nos mudando para Guarulhos-SP.</p>
           <p>Queremos enfatizar que valorizamos sua presença e apoio acima de qualquer presente material.</p>
+          <p style={{fontStyle: 'italic'}}>Com amor, Leonardo e Laiane.</p>
           <span>
             <p>CHAVE PIX:</p>
             <h3>lairmacedo@outlook.com</h3>
             <p>Laiane Rodrigues Macedo </p>
           </span>
-          <p style={{fontStyle: 'italic'}}>Com amor, Leonardo e Laiane.</p>
           <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
         </div>
       </Main>

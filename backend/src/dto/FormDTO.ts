@@ -67,7 +67,6 @@ export class GuestDTO {
     guestNames: unknown
   ): EditGuestOutputDTO{
 
-    console.log(response, guestNames)
     if(idToEdit === ":id"){
       throw new BadRequestError("ERROR: report the id of the user to be edited.")
     }

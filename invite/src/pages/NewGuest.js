@@ -249,7 +249,6 @@ export const NewGuest = () => {
             </form>
             <ul>
               {allGuests.map((valor, index) => {
-                console.log(valor.response)
                 return <Li response={valor.response} key={index}>LINK: {valor.id} &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
               })}
             </ul>
