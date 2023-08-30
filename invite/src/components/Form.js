@@ -129,7 +129,7 @@ export const Form = ({response, setResponse, guest}) => {
         <span>
           <p>Estarei com vocês! &nbsp;<img src={happy}/></p>
         </span>
-        <form className='form' onSubmit={() => editGuest(true)}>
+        <div className='form'>
           <div>
             {new Array(guest?.tickets).fill().map((_, index) => {
               return (
@@ -150,9 +150,9 @@ export const Form = ({response, setResponse, guest}) => {
           </div>
           <span>
             <button type="button" className="btn cancel" onClick={() => setResponse(null)}>Cancelar</button>
-            <button type="submit" className="btn confirm">Enviar</button>
+            <button type="button" className="btn confirm" onClick={() => editGuest(true)}>Enviar</button>
           </span>
-        </form>
+        </div>
       </>
       :
       <>
