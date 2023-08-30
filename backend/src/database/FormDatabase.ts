@@ -36,15 +36,19 @@ abstract class BaseDatabase {
 
   private static async runMigrations(conn: any) {
     try {
-      const sqlFilePath = path.join(__dirname, 'form.sql'); 
-      const sql = fs.readFileSync(sqlFilePath).toString();
+      const sqlFilePath = path.join(__dirname, 'caminho', 'para', 'arquivo.sql');
+      console.log('SQL File Path:', sqlFilePath); // Verifique se o caminho está correto
       
-      await this.connection.schema.raw(sql); 
+      const sql = fs.readFileSync(sqlFilePath).toString();
+      console.log('SQL Content:', sql); // Verifique o conteúdo do SQL
+      
+      await this.connection.schema.raw(sql);
       console.log('Tabela criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar a tabela:', error);
     }
   }
+  
 }
 
 
