@@ -36,7 +36,7 @@ abstract class BaseDatabase {
 
   private static async runMigrations(conn: any) {
     try {
-      const sqlFilePath = path.join(__dirname, 'caminho', 'para', 'arquivo.sql');
+      const sqlFilePath = path.join(__dirname, 'form.sql');
       console.log('SQL File Path:', sqlFilePath); // Verifique se o caminho está correto
       
       const sql = fs.readFileSync(sqlFilePath).toString();
