@@ -20,7 +20,6 @@ export class GuestDTO {
     id: unknown,
     tickets: unknown
   ): InsertGuestOutputDTO{
-
     if (!id ||  id === "") {
       throw new BadRequestError("ERROR: 'id' field is mandatory.")
     }
@@ -36,7 +35,7 @@ export class GuestDTO {
     }
 
     const dto = {
-      id,
+      id: id.toLocaleLowerCase().trim().replace(/ /g, "-"),
       tickets
     }
 
@@ -55,7 +54,7 @@ export class GuestDTO {
     }
 
     const dto = {
-      idToDelete
+      idToDelete: idToDelete.toLocaleLowerCase().trim().replace(/ /g, "-")
     }
 
     return dto
@@ -83,7 +82,7 @@ export class GuestDTO {
     }
 
     const dto: EditGuestOutputDTO = {
-      idToEdit,
+      idToEdit: idToEdit.toLocaleLowerCase().trim().replace(/ /g, "-"),
       response,
       guestNames
     }
