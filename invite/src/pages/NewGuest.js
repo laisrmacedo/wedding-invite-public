@@ -4,6 +4,7 @@ import { Header } from '../components/Header'
 import { useEffect, useState } from 'react'
 import { BASE_URL } from '../App'
 import axios from "axios";
+import { LoadingAnimation } from '../components/LoadingAnimation'
 
 const Main = styled.main`
   flex-direction: column;
@@ -16,14 +17,15 @@ const Main = styled.main`
   >span{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 80%;
-    height: 50%;
+    height: calc(100% - 80px);
+    overflow-y: auto;
     padding: 0 20px;
     h1{
       font-size: 28px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     p{
       font-size: 16px;
@@ -72,7 +74,7 @@ const Main = styled.main`
   }
 
   label{
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 4px;
     margin-bottom: 16px;
     width: 100%;
@@ -90,13 +92,42 @@ const Main = styled.main`
   input{
     width: 90%;
   }
+  ul{
+    width: 100%;
+    height: 45%;
+    overflow-y: auto;
+    margin-top: 20px;
+    background: #DCD9D7;
+  }
+  .subtitle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 20px; */
+    p{
+      font-size: 11px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+  }
 `
+const Li = styled.li`
+  font-size: 11px;
+  text-align: left;
+  border-bottom: 1px solid #A6988A;
+  padding: 4px;
+  color: ${(props) => props.response === null? '#ba8928' : props.response === 1? "#56764C" : "#B93112"};
+`
+
 
 export const NewGuest = () => {
   const [disabledAddBtn, setDisabledAddBtn] = useState(true)
   const [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
   const [error, setError] = useState(null)
   const [tickets, setTickets] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [allGuests, setAllGuests] = useState(true)
   const [form, setForm] = useState({
     guest: "",
     tickets: 0
@@ -162,6 +193,8 @@ export const NewGuest = () => {
         return accumulator + currentValue.tickets
       }, 0)
       setTickets(sum)
+      setLoading(false)
+      setAllGuests(response.data)
     } catch (error) {
       console.log(error.response.data)
     }
@@ -179,37 +212,54 @@ export const NewGuest = () => {
       <Main add={disabledAddBtn} delete={disabledDeleteBtn}>
         <Header />
         <span>
-          <h1>Convidado</h1>
-          <form action='' method='POST' onSubmit={handleClick}>
-            <label htmlFor="guest">Digite o nome do convidado e escolha a quantidade de senhas que ele vai receber. Se o convidado já estiver na sua lista, você pode exclui-lo.</label>
-            <div>
-              <input
-                id='guest'
-                placeholder="Nome do convidado"
-                required
-                type="text"
-                name="guest"
-                value={form.guest}
-                onChange={onChangeForm}
-                />
-              <select disabled={disabledAddBtn} name="tickets" id="tickets" value={form.tickets} onChange={onChangeForm}>
-                <option value="">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+          <h1>Lista de Convidados</h1>
+          {loading?
+            <LoadingAnimation height={100} width={100}/>
+            :
+            <>
+            <form action='' method='POST' onSubmit={handleClick}>
+              <label htmlFor="guest">Digite o nome do convidado e escolha a quantidade de senhas que ele vai receber. Se o convidado já estiver na sua lista, você pode exclui-lo.</label>
+              <div>
+                <input
+                  id='guest'
+                  placeholder="Nome do convidado"
+                  required
+                  type="text"
+                  name="guest"
+                  value={form.guest}
+                  onChange={onChangeForm}
+                  />
+                <select disabled={disabledAddBtn} name="tickets" id="tickets" value={form.tickets} onChange={onChangeForm}>
+                  <option value="">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <span>
+                <p>{error === error1? "Este convidado já está cadastrado." : error === error2? "Informe a quantidade de senhas." : `${tickets} senhas cadastradas`}</p>
+              </span>
+              <div>
+                <button type="submit" disabled={disabledAddBtn} className="btn add">Adicionar</button>
+                <button type="button" disabled={disabledDeleteBtn} className="btn delete" onClick={() => deleteGuest()}>Excluir</button>
+              </div>
+            </form>
+            <ul>
+              {allGuests.map((valor, index) => {
+                console.log(valor.response)
+                return <Li response={valor.response} key={index}>LINK: {valor.id} &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
+              })}
+            </ul>
+            <div className='subtitle'>
+              <p style={{background: '#56764C'}}>CONFIRMADO</p>
+              <p style={{background: '#B93112'}}>NAO VAI</p>
+              <p style={{background: '#ba8928'}}>SEM RESPOSTA</p>
             </div>
-            <span>
-              <p>{error === error1? "Este convidado já está cadastrado." : error === error2? "Informe a quantidade de senhas." : `${tickets} senhas cadastradas`}</p>
-            </span>
-            <div>
-              <button type="submit" disabled={disabledAddBtn} className="btn add">Adicionar</button>
-              <button type="button" disabled={disabledDeleteBtn} className="btn delete" onClick={() => deleteGuest()}>Excluir</button>
-            </div>
-          </form>
+            </>
+          }
         </span>
       </Main>
     </Container>
