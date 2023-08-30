@@ -29,6 +29,7 @@ export class FormBusiness{
     if (id.length < 5) {
       throw new BadRequestError("ERROR: 'id' must be at least 5 characters.")
     }
+  
     if (tickets < 1) {
       throw new BadRequestError("ERROR: 'tickets' must be at least equal to 1.")
     }
@@ -39,7 +40,7 @@ export class FormBusiness{
     }
 
     const guestInstance = new Guest(
-      id,
+      id.toLocaleLowerCase().replace(" ", "-"),
       tickets,
       new Date().toISOString(),
       undefined,
