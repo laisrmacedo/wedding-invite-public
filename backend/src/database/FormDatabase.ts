@@ -7,50 +7,44 @@ import * as fs from 'fs';
 import * as path from 'path';
 import knex from 'knex';
 
-abstract class BaseDatabase {
-  private static migrationExecuted = false;
-
+class BaseDatabase {
   protected static connection = knex({
-    client: "pg", 
+    client: 'pg', // Usar o cliente do PostgreSQL
     connection: {
-      host: process.env.DB_HOST as string,
-      port: Number(process.env.DB_PORT),
-      user: process.env.DB_USER as string,
-      password: process.env.DB_PASSWORD as string,
-      database: process.env.DB_NAME as string,
+      host: process.env.DB_HOST, // Host do banco de dados
+      port: Number(process.env.DB_PORT), // Porta do banco de dados
+      user: process.env.DB_USER, // Usuário do banco de dados
+      password: process.env.DB_PASSWORD, // Senha do banco de dados
+      database: process.env.DB_NAME, // Nome do banco de dados
     },
-    pool: { 
+    pool: {
       min: 0,
       max: 1,
       afterCreate: (conn: any, cb: any) => {
-        conn.query("SET timezone='UTC';", () => { // Configuração específica para PostgreSQL
-          if (!this.migrationExecuted) {
-            this.runMigrations(conn);
-            this.migrationExecuted = true;
-          }
-          cb();
+        conn.query('SET timezone="UTC";', (err: any) => {
+          cb(err, conn);
         });
-      }
-    }
+      },
+    },
   });
 
-  private static async runMigrations(conn: any) {
+  // Função para criar a tabela a partir do arquivo 'form.db'
+  public async createFormTable(): Promise<void> {
     try {
-      const sqlFilePath = path.join(__dirname, 'form.sql');
-      console.log('SQL File Path:', sqlFilePath); // Verifique se o caminho está correto
+      const tableExists = await BaseDatabase.connection.schema.hasTable('form');
       
-      const sql = fs.readFileSync(sqlFilePath).toString();
-      console.log('SQL Content:', sql); // Verifique o conteúdo do SQL
-      
-      await this.connection.raw(sql); // Usando knex.raw
-
-      console.log('Tabela criada com sucesso!');
+      if (!tableExists) {
+        const filePath = path.join(__dirname, 'form.sql'); // Caminho completo para o arquivo
+        const sql = fs.readFileSync(filePath, 'utf-8'); // Ler o conteúdo do arquivo
+        await BaseDatabase.connection.raw(sql); // Executar o SQL para criar a tabela
+        console.log('Tabela "form" criada com sucesso.');
+      }
     } catch (error) {
-      console.error('Erro ao criar a tabela:', error);
+      console.error('Erro ao criar/verificar a tabela "form":', error);
     }
   }
-  
 }
+
 
 
 export interface GuestDB {
@@ -64,10 +58,12 @@ export interface GuestDB {
 
 export class FormDatabase extends BaseDatabase{
   //attributes
-  public static TABLE_GUESTS = "guests" //global constant
+  public static TABLE_GUESTS = "form" //global constant
 
   //methods
   public async getGuests(){
+    await this.createFormTable()
+
     const guestDB = await BaseDatabase
       .connection(FormDatabase.TABLE_GUESTS)
 

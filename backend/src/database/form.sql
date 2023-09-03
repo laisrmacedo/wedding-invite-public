@@ -1,5 +1,5 @@
 -- Active: 1693426668140@@127.0.0.1@5432@postgres
-CREATE TABLE guests (
+CREATE TABLE form (
   id TEXT PRIMARY KEY UNIQUE NOT NULL,
   tickets INTEGER NOT NULL,
   created_at TEXT NOT NULL,
@@ -7,6 +7,3 @@ CREATE TABLE guests (
   guest_names TEXT,
   replied_at TEXT 
 );
-
-SELECT * FROM guests;
-DROP TABLE guests;
