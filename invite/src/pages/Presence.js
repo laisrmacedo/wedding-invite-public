@@ -21,9 +21,9 @@ const Main = styled.main`
     flex-direction: column;
     align-items: center;
     min-height: 40px;
-    p{
+    /* p{
       font-size: 14px;
-    }
+    } */
   }
 
   >span{
@@ -102,7 +102,7 @@ export const Presence = () => {
         <h1>Confirme sua Presença</h1>
         <div className="subtitle">
           <p>Sua presença é essencial para tornar nosso casamento ainda mais <i>especial</i> e <i>memorável</i>.</p>
-          <p>Por favor, confirme sua presença até <strong>31/08/2023</strong> para que possamos organizar todos os preparativos com carinho e atenção aos detalhes. </p> 
+          <p>Por favor, confirme sua presença até &nbsp;<strong>20/09/2023</strong>&nbsp; para que possamos organizar todos os preparativos com carinho e atenção aos detalhes. </p> 
         </div>
         {loading? 
           <span className="visible">
@@ -111,7 +111,7 @@ export const Presence = () => {
           :
           <>
             <span id="check" className={response === null? "visible" : "hidden"}>
-              <h3>Reservamos &nbsp;<strong>{`${guest?.tickets}`} senhas</strong>&nbsp; para você.</h3>
+              <h3>Reservamos &nbsp;<strong>{`${guest?.tickets} ${guest?.tickets === 1? 'senha': 'senhas'}`}</strong>&nbsp; para você.</h3>
               <p>Você poderá comparecer?</p>
               <span>
                 <button className="btn checkBtn" onClick={() => setResponse(true)}>&#10003; &nbsp;SIM</button>
