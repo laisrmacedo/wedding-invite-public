@@ -37,7 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(8px);
     /* background-color: rgb(231, 213, 194, .4); */
-    background-color: rgb(217, 220, 217, .3);
+    background-color: rgb(217, 220, 217, .5);
   }
 
 h1{
