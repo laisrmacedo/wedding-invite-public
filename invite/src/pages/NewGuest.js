@@ -19,7 +19,7 @@ const Main = styled.main`
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    width: 80%;
+    width: 92%;
     height: calc(100% - 80px);
     overflow-y: auto;
     padding: 0 20px;
