@@ -13,7 +13,7 @@ const Span = styled.span`
     opacity: .7;
   }
   p{
-    font-weight: 200;
+    font-weight: 400;
     font-size: min(10vw, 10px);
     text-transform: uppercase;
   }
