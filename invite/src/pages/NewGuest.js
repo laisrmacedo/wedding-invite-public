@@ -263,7 +263,7 @@ export const NewGuest = () => {
               })}
               {allGuests.filter(item => item.response === null).map((valor, index) => {
                 return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
-              }).reverse()}
+              })}
               {allGuests.filter(item => item.response === 0).map((valor, index) => {
                 return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
               })}
