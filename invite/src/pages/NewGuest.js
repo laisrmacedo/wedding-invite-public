@@ -113,11 +113,14 @@ const Main = styled.main`
   }
 `
 const Li = styled.li`
-  font-size: 11px;
+  font-size: 13px;
   text-align: left;
   border-bottom: 1px solid #A6988A;
   padding: 4px;
   color: ${(props) => props.response === null? '#ba8928' : props.response === 1? "#56764C" : "#B93112"};
+  a{
+    text-decoration: none;
+  }
 `
 
 
@@ -126,6 +129,7 @@ export const NewGuest = () => {
   const [disabledDeleteBtn, setDisabledDeleteBtn] = useState(true)
   const [error, setError] = useState(null)
   const [tickets, setTickets] = useState(0)
+  const [ticketsYes, setTicketsYes] = useState(0)
   const [loading, setLoading] = useState(true)
   const [allGuests, setAllGuests] = useState(true)
   const [form, setForm] = useState({
@@ -192,7 +196,13 @@ export const NewGuest = () => {
       const sum = response.data.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.tickets
       }, 0)
+
+      const sumYes = response.data.filter(item => item.response === 1).reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.tickets
+      }, 0)
+
       setTickets(sum)
+      setTicketsYes(sumYes)
       setLoading(false)
       setAllGuests(response.data)
     } catch (error) {
@@ -248,12 +258,18 @@ export const NewGuest = () => {
               </div>
             </form>
             <ul>
-              {allGuests.map((valor, index) => {
-                return <Li response={valor.response} key={index}>LINK: {valor.id} &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
+              {allGuests.filter(item => item.response === 1).map((valor, index) => {
+                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
+              })}
+              {allGuests.filter(item => item.response === null).map((valor, index) => {
+                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
+              }).reverse()}
+              {allGuests.filter(item => item.response === 0).map((valor, index) => {
+                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} senhas &sdot; {valor.guest_names}</Li>
               })}
             </ul>
             <div className='subtitle'>
-              <p style={{background: '#56764C'}}>CONFIRMADO</p>
+              <p style={{background: '#56764C'}}>CONFIRMADO:&nbsp; {ticketsYes}</p>
               <p style={{background: '#B93112'}}>NAO VAI</p>
               <p style={{background: '#ba8928'}}>SEM RESPOSTA</p>
             </div>
