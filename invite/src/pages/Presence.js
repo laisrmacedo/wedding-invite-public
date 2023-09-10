@@ -98,7 +98,7 @@ export const Presence = () => {
   return(
     <Container>
       <Main>
-        <Header/>
+        <Header showBtn={true}/>
         <h1>Confirme sua Presença</h1>
         <div className="subtitle">
           <p>Sua presença é essencial para tornar nosso casamento ainda mais <i>especial</i> e <i>memorável</i>.</p>

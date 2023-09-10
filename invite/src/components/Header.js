@@ -46,7 +46,11 @@ export const Header = (props) => {
         <Animation width={40} height={40}/>
         <h1>Leonardo & Laiane</h1>
       </div>
-      <button className="btn checkBtn" onClick={() => goToHome(navigate, name, n)}>&#5130; &nbsp;Voltar</button>
+      {props.showBtn? 
+        <button className="btn checkBtn" onClick={() => goToHome(navigate, name, n)}>&#5130; &nbsp;Voltar</button>
+      :
+      <></>
+      }
     </Content>
   )
 }

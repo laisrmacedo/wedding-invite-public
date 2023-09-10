@@ -46,7 +46,7 @@ export const Gift = () => {
     <Container>
       {/* link : https://goo.gl/maps/q5gau8ej3HoRxxwW9 */}
       <Main>
-        <Header/>
+        <Header showBtn={true}/>
         <div>
           <h1>Sobre Presentes</h1>
           <p>Pensando na praticidade e conveniência, gostaríamos de sugerir que o envio de presentes seja em forma de <strong>transferência via Pix</strong>. Essa opção facilitará o processo para todos e nos permitirá utilizar seu presente de maneira significativa em nossa nova vida juntos, já que estamos nos mudando para Guarulhos-SP.</p>

@@ -44,7 +44,7 @@ export const Location = () => {
     <Container>
       {/* link : https://goo.gl/maps/q5gau8ej3HoRxxwW9 */}
       <Main>
-        <Header/>
+        <Header showBtn={true}/>
         <span>
           <h1>Sobre o Local</h1>
           <p>Cerimônia e Recepção</p>
