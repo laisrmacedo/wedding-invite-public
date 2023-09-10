@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import knex from 'knex';
 
-class BaseDatabase {
+export class BaseDatabase {
   protected static connection = knex({
     client: 'pg', // Usar o cliente do PostgreSQL
     connection: {
