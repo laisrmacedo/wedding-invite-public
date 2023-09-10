@@ -259,7 +259,7 @@ export const NewGuest = () => {
             </form>
             <ul>
               {allGuests.filter(item => item.response === 1).map((valor, index) => {
-                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names}</Li>
+                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names.replaceAll(" ,", "")}</Li>
               })}
               {allGuests.filter(item => item.response === 0).map((valor, index) => {
                 return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
