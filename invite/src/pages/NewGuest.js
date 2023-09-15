@@ -130,6 +130,7 @@ export const NewGuest = () => {
   const [error, setError] = useState(null)
   const [tickets, setTickets] = useState(0)
   const [ticketsYes, setTicketsYes] = useState(0)
+  const [ticketsNo, setTicketsNo] = useState(0)
   const [loading, setLoading] = useState(true)
   const [allGuests, setAllGuests] = useState(true)
   const [form, setForm] = useState({
@@ -201,8 +202,13 @@ export const NewGuest = () => {
           return accumulator + currentValue.tickets
       }, 0)
 
+      const sumNo = response.data.filter(item => item.response === 0).reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.tickets
+      }, 0)
+
       setTickets(sum)
       setTicketsYes(sumYes)
+      setTicketsNo(sumNo)
       setLoading(false)
       setAllGuests(response.data)
     } catch (error) {
@@ -259,7 +265,7 @@ export const NewGuest = () => {
             </form>
             <ul>
               {allGuests.filter(item => item.response === 1).map((valor, index) => {
-                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names.replaceAll(" ,", "")}</Li>
+                return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names}</Li>
               })}
               {allGuests.filter(item => item.response === 0).map((valor, index) => {
                 return <Li response={valor.response} key={index}><a href={'https://leonardoelaiane.vercel.app/'+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
@@ -270,7 +276,7 @@ export const NewGuest = () => {
             </ul>
             <div className='subtitle'>
               <p style={{background: '#56764C'}}>CONFIRMADO:&nbsp; {ticketsYes}</p>
-              <p style={{background: '#B93112'}}>NAO VAI</p>
+              <p style={{background: '#B93112'}}>NEGADO: &nbsp; {ticketsNo}</p>
               <p style={{background: '#ba8928'}}>SEM RESPOSTA</p>
             </div>
             </>
