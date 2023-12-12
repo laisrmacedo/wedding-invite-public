@@ -223,8 +223,8 @@ export const NewGuest = () => {
   const error1 = "ERROR: 'id' already exists."
   const error2 = "ERROR: 'tickets' field is mandatory."
 
-  const url1 = "https://leonardoelaiane.vercel.app/"
-  const url2 = "http://localhost:3000/"
+  const url = "https://leonardoelaiane.vercel.app/"
+  // const url = "http://localhost:3000/"
 
   return (
     <Container>
@@ -268,13 +268,13 @@ export const NewGuest = () => {
             </form>
             <ul>
               {allGuests.filter(item => item.response === 1).map((valor, index) => {
-                return <Li response={valor.response} key={index}><a href={url1+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names}</Li>
+                return <Li response={valor.response} key={index}><a href={url+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'} &sdot; {valor.guest_names}</Li>
               })}
               {allGuests.filter(item => item.response === 0).map((valor, index) => {
-                return <Li response={valor.response} key={index}><a href={url1+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
+                return <Li response={valor.response} key={index}><a href={url+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
               })}
               {allGuests.filter(item => item.response === null).map((valor, index) => {
-                return <Li response={valor.response} key={index}><a href={url1+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
+                return <Li response={valor.response} key={index}><a href={url+valor.id} target='_blank'>{valor.id}</a> &sdot; {valor.tickets} {valor.tickets === 1? 'senha': 'senhas'}</Li>
               }).reverse()}
             </ul>
             <div className='subtitle'>
