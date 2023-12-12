@@ -7,3 +7,5 @@ CREATE TABLE form (
   guest_names TEXT,
   replied_at TEXT 
 );
+
+SELECT * FROM form;
