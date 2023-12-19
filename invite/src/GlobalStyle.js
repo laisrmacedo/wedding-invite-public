@@ -113,9 +113,9 @@ p{
   width: 200px;
 }
 
-  .icons{
+.icons{
   display: flex;
   width: 80%;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 `

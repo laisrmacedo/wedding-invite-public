@@ -26,6 +26,13 @@ const Main = styled.main`
       justify-content: center;
       font-size: min(5.8vw, 26px);
     }
+
+    .title{
+      p{
+        text-transform: uppercase;
+        font-size: 16px;
+      }
+    }
 `
 
 
@@ -55,7 +62,8 @@ export const Home = () => {
         <Animation width={300} height={300}/>
         <div className="title">
           <h1>Leonardo &nbsp; & &nbsp; Laiane</h1>
-          <p>com amor, convidam para seu casamento</p>
+          {/* <p>com amor, convidam para seu casamento</p> */}
+          <p>Contagem regressiva para o grande dia!</p>
         </div>
         <h2>
           06 &nbsp;| &nbsp;JANEIRO&nbsp; | &nbsp;2024&nbsp; |&nbsp; 16H
@@ -63,7 +71,7 @@ export const Home = () => {
         <div className="icons">
           <Button onClick={() => goToLocation(navigate, name)} img={location} text={"Local"}/>
           <Button onClick={() => goToGift(navigate, name)} img={gift} text={"Presentes"}/>
-          <Button onClick={() => goToCheck(navigate, name)} img={check} text={"Confirmação de presença"}/>
+          {/* <Button onClick={() => goToCheck(navigate, name)} img={check} text={"Confirmação de presença"}/> */}
         </div>
       </Main>
     </Container>
