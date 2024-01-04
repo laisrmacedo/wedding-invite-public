@@ -38,6 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     backdrop-filter: blur(8px);
     /* background-color: rgb(231, 213, 194, .4); */
     background-color: rgb(217, 220, 217, .5);
+    min-height: 550px;
   }
 
 h1{
