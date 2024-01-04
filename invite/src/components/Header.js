@@ -44,7 +44,7 @@ export const Header = (props) => {
     <Content>
       <div>
         <Animation width={40} height={40}/>
-        <h1>Leonardo & Laiane</h1>
+        <h1>Laiane & Leonardo</h1>
       </div>
       {props.showBtn? 
         <button className="btn checkBtn" onClick={() => goToHome(navigate, name, n)}>&#5130; &nbsp;Voltar</button>
