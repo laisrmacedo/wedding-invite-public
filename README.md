@@ -23,9 +23,9 @@ This project consists of two interfaces:
   The organizer begins by registering all the guests for the couple's big day, providing a unique identifier and the number of invitations the guest is entitled to. They can add or remove names as needed. A link is then generated and sent to the respective guest to access the application, and they can only submit their response once. This ensures that no unauthorized person can access the invitation.
 
 <p align="center">
-  <img width="150px" src="./frontend/src/assets/screenshort-7.png" />
-  <img width="150px" src="./frontend/src/assets/screenshort-8.png" />
-  <img width="150px" src="./frontend/src/assets/screenshort-9.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-7.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-8.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-9.png" />
 </p>
 
 - **Guest Interface:** [laianeeleonardo.vercel.app/nome-do-convidado-3](https://laianeeleonardo.vercel.app/nome-do-convidado-3)
@@ -33,12 +33,12 @@ This project consists of two interfaces:
   Each guest receives a specific link that directs them to this interface. Here, the guest has access to all the information about the couple's big day, such as the date and time, the ceremony location, gift instructions, and contact information. Additionally, the guest has the option to accept or decline the invitation, and the organizers can view their response.
 
 <p align="center">
-  <img width="120px" src="./frontend/src/assets/screenshort-1.png" />
-  <img width="120px" src="./frontend/src/assets/screenshort-2.png" />
-  <img width="120px" src="./frontend/src/assets/screenshort-3.png" />
-  <img width="120px" src="./frontend/src/assets/screenshort-4.png" />
-  <img width="120px" src="./frontend/src/assets/screenshort-5.png" />
-  <img width="120px" src="./frontend/src/assets/screenshort-6.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-1.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-2.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-3.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-4.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-5.png" />
+  <img width="120px" src="./frontend/src/assets/screenshot-6.png" />
 </p>
 
 ## 🛠 Technologies
