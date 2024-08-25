@@ -8,7 +8,7 @@ const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  padding: 10px;
+  padding: 10px 0;
   position: relative;
   background-color: #D3D2D2;
   .transition{

@@ -30,15 +30,25 @@ export const GlobalStyle = createGlobalStyle`
 
   main{
     display: flex;
-    /* border: 1px solid #7B5E5A; */
     width: 100%;
     max-width: 420px;
-    height: 83vh;
+    height: 100%;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(8px);
-    /* background-color: rgb(231, 213, 194, .4); */
     background-color: rgb(217, 220, 217, .5);
     min-height: 550px;
+  }
+
+  .container-main{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 85%;
+      max-height: 660px;
   }
 
 h1{

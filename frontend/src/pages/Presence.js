@@ -8,6 +8,7 @@ import { Form } from "../components/Form"
 import axios from "axios"
 import { BASE_URL } from "../App"
 import { LoadingAnimation } from "../components/LoadingAnimation"
+import { Footer } from "../components/Footer"
 
 const Main = styled.main`
   flex-direction: column;
@@ -16,14 +17,18 @@ const Main = styled.main`
   padding-bottom: 10px; 
   position: relative;
   z-index: 1;
+  h1{
+    width: 80%;
+    /* border: 1px solid blue; */
+  }
   .subtitle{
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 40px;
-    /* p{
-      font-size: 14px;
-    } */
+    p{
+      font-size: 16px;
+    }
   }
 
   >span{
@@ -32,7 +37,13 @@ const Main = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid blue; */
+  }
+
+  span{
+    p{
+      width: 100%;
+      font-size: 16px;
+    }
   }
   
   #check{
@@ -54,9 +65,6 @@ const Main = styled.main`
       font-size: 14px;
       font-weight: 100;
     }
-  }
-  p{
-    font-size: 16px;
   }
   h3{
     text-transform: uppercase;
@@ -98,6 +106,7 @@ export const Presence = () => {
   return(
     <Container>
       <Main>
+        <div className="container-main">
         <Header showBtn={true}/>
         <h1>Confirme sua Presença</h1>
         <div className="subtitle">
@@ -127,6 +136,8 @@ export const Presence = () => {
           </>
         }
         <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
+        </div>
+        <Footer/>
       </Main>
     </Container>
   )

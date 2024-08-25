@@ -10,13 +10,10 @@ import { goToCheck, goToError, goToGift, goToLocation } from '../router/coordina
 import { BASE_URL } from '../App';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { Footer } from '../components/Footer';
 
 const Main = styled.main`
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+    padding-top:40px;
     h1{
       width: 80%;
       font-size: min(10vw, 40px);
@@ -59,11 +56,11 @@ export const Home = () => {
   return(
     <Container>
       <Main>
+        <div className='container-main'>
         <Animation width={300} height={300}/>
         <div className="title">
           <h1>Laiane &nbsp; & &nbsp; Leonardo</h1>
-          {/* <p>com amor, convidam para seu casamento</p> */}
-          <p>Contagem regressiva para o grande dia!</p>
+          <p>com amor, convidam para seu casamento</p>
         </div>
         <h2>
           06 &nbsp;| &nbsp;JANEIRO&nbsp; | &nbsp;2024&nbsp; |&nbsp; 16H
@@ -71,8 +68,10 @@ export const Home = () => {
         <div className="icons">
           <Button onClick={() => goToLocation(navigate, name)} img={location} text={"Local"}/>
           <Button onClick={() => goToGift(navigate, name)} img={gift} text={"Presentes"}/>
-          {/* <Button onClick={() => goToCheck(navigate, name)} img={check} text={"Confirmação de presença"}/> */}
+          <Button onClick={() => goToCheck(navigate, name)} img={check} text={"Confirmação de presença"}/>
         </div>
+        </div>
+      <Footer/>
       </Main>
     </Container>
   )

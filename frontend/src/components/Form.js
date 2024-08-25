@@ -93,7 +93,7 @@ const Container = styled.div`
   }
   .confirm{
     color: #f2f2f2;
-    background: ${(props) => props.response? '#56764C' : '#B93112'};
+    background: ${(props) => !props.response ? '#B93112' : props.response && props.isDisabledBtn ? '#80808061'  : '#56764C'};
   }
 `
 export const Form = ({response, setResponse, guest}) => {
@@ -110,8 +110,17 @@ export const Form = ({response, setResponse, guest}) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
   }
+  const [isDisabledBtn, setIsSisabledBtn] = useState(true)
 
   let guestNames = `${form.ticket0}, ${form.ticket1}, ${form.ticket2}, ${form.ticket3}, ${form.ticket4}, ${form.ticket5}`
+
+  useEffect(()=>{
+    if(form.ticket0.length >= 2){
+      setIsSisabledBtn(false)
+    }else{
+      setIsSisabledBtn(true)
+    }
+  },[form])
 
   const editGuest = async (boolean) => {
     try {
@@ -123,7 +132,7 @@ export const Form = ({response, setResponse, guest}) => {
   }
   
   return(
-    <Container response={response}>
+    <Container response={response} isDisabledBtn={isDisabledBtn}>
       {response ? 
       <>
         <span>
@@ -137,7 +146,7 @@ export const Form = ({response, setResponse, guest}) => {
                   <label htmlFor={"ticket-"+index}>SENHA {`${index + 1}`}</label>
                   <input
                     id={"ticket-"+index}
-                    placeholder={index === 0? "Seu nome" : "Acompanhante"}
+                    placeholder={index === 0? "Digite seu nome" : "Nome do seu acompanhante"}
                     required
                     type="text"
                     name={"ticket"+index}
@@ -150,7 +159,7 @@ export const Form = ({response, setResponse, guest}) => {
           </div>
           <span>
             <button type="button" className="btn cancel" onClick={() => setResponse(null)}>Cancelar</button>
-            <button type="button" className="btn confirm" onClick={() => editGuest(true)}>Enviar</button>
+            <button type="button" className="btn confirm" onClick={() => editGuest(true)} disabled={isDisabledBtn}>Enviar</button>
           </span>
         </div>
       </>

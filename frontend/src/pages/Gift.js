@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Container } from '../components/Container'
 import { Header } from '../components/Header'
 import whatsapp from '../assets/whatsapp.png'
+import { Footer } from '../components/Footer'
 
 const Main = styled.main`
     flex-direction: column;
@@ -10,13 +11,15 @@ const Main = styled.main`
     padding-bottom: 40px; 
     position: relative;
     z-index: 1;
+
+    .container-main{
     p{
       font-size: 16px;
     }
     >div{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
       width: 100%;
       height: 100%;
@@ -39,26 +42,30 @@ const Main = styled.main`
       }
     }
     }
+  }
 `
 
 export const Gift = () => {
-  return(
+  return (
     <Container>
       {/* link : https://goo.gl/maps/q5gau8ej3HoRxxwW9 */}
       <Main>
-        <Header showBtn={true}/>
-        <div>
-          <h1>Sobre Presentes</h1>
-          <p>Pensando na praticidade e conveniência, gostaríamos de sugerir que o envio de presentes seja em forma de <strong>transferência via Pix</strong>. Essa opção facilitará o processo para todos e nos permitirá utilizar seu presente de maneira significativa em nossa nova vida juntos, já que estamos nos mudando para Guarulhos-SP.</p>
-          <p>Queremos enfatizar que valorizamos sua presença e apoio acima de qualquer presente material.</p>
-          <p style={{fontStyle: 'italic'}}>Com amor, Leonardo e Laiane.</p>
-          <span>
-            <p>CHAVE PIX:</p>
-            <h3>lairmacedo@outlook.com</h3>
-            <p>Laiane Rodrigues Macedo </p>
-          </span>
-          <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp}/> Mais Informações</a>
+        <div className='container-main'>
+          <Header showBtn={true} />
+          <div>
+            <h1>Sobre Presentes</h1>
+            <p>Pensando na praticidade e conveniência, gostaríamos de sugerir que o envio de presentes seja em forma de <strong>transferência via Pix</strong>. Essa opção facilitará o processo para todos e nos permitirá utilizar seu presente de maneira significativa em nossa nova vida juntos.</p>
+            <p>Queremos enfatizar que valorizamos sua presença e apoio acima de qualquer presente material.</p>
+            <p style={{ fontStyle: 'italic' }}>Com amor, Leonardo e Laiane.</p>
+            <span>
+              <p>CHAVE PIX:</p>
+              <h3>lai*****@outlook.com</h3>
+              {/* <p>Laiane Rodrigues Macedo </p> */}
+            </span>
+            <a className="btn wppBtn" href='https://wa.me/+558796267434' target='_blank'><img src={whatsapp} /> Mais Informações</a>
+          </div>
         </div>
+        <Footer />
       </Main>
     </Container>
   )
