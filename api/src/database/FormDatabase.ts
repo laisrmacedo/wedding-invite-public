@@ -7,44 +7,44 @@ dotenv.config()
 // import * as path from 'path';
 import knex from 'knex';
 
-// export abstract class BaseDatabase {
-//   protected static connection = knex({
-//       client: "sqlite3",
-//       connection: {
-//           filename: process.env.DB_FILE_PATH as string,
-//       },
-//       useNullAsDefault: true,
-//       pool: { 
-//           min: 0,
-//           max: 1,
-//           afterCreate: (conn: any, cb: any) => {
-//               conn.run("PRAGMA foreign_keys = ON", cb)
-//           }
-//       }
-//   })
-// }
-
-export class BaseDatabase {
+export abstract class BaseDatabase {
   protected static connection = knex({
-    client: 'pg', // Usar o cliente do PostgreSQL
-    connection: {
-      host: process.env.DB_HOST, // Host do banco de dados
-      port: Number(process.env.DB_PORT), // Porta do banco de dados
-      user: process.env.DB_USER, // Usuário do banco de dados
-      password: process.env.DB_PASSWORD, // Senha do banco de dados
-      database: process.env.DB_NAME, // Nome do banco de dados
-    },
-    pool: {
-      min: 0,
-      max: 1,
-      afterCreate: (conn: any, cb: any) => {
-        conn.query('SET timezone="UTC";', (err: any) => {
-          cb(err, conn);
-        });
+      client: "sqlite3",
+      connection: {
+          filename: process.env.DB_FILE_PATH as string,
       },
-    },
-  });
+      useNullAsDefault: true,
+      pool: { 
+          min: 0,
+          max: 1,
+          afterCreate: (conn: any, cb: any) => {
+              conn.run("PRAGMA foreign_keys = ON", cb)
+          }
+      }
+  })
 }
+
+// export class BaseDatabase {
+//   protected static connection = knex({
+//     client: 'pg', // Usar o cliente do PostgreSQL
+//     connection: {
+//       host: process.env.DB_HOST, // Host do banco de dados
+//       port: Number(process.env.DB_PORT), // Porta do banco de dados
+//       user: process.env.DB_USER, // Usuário do banco de dados
+//       password: process.env.DB_PASSWORD, // Senha do banco de dados
+//       database: process.env.DB_NAME, // Nome do banco de dados
+//     },
+//     pool: {
+//       min: 0,
+//       max: 1,
+//       afterCreate: (conn: any, cb: any) => {
+//         conn.query('SET timezone="UTC";', (err: any) => {
+//           cb(err, conn);
+//         });
+//       },
+//     },
+//   });
+// }
 
 export interface GuestDB {
   id: string,
